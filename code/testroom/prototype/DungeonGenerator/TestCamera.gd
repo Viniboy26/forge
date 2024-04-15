@@ -2,15 +2,17 @@ extends Camera2D
 
 # Settings
 var zoom_speed: float = 0.05  # Zoom sensitivity
-var min_zoom: Vector2 = Vector2(0.5, 0.5)  # Minimum zoom level
-var max_zoom: Vector2 = Vector2(4, 4)  # Maximum zoom level
+var min_zoom: Vector2 = Vector2(1, 1)  # Minimum zoom level
+var max_zoom: Vector2 = Vector2(15, 15)  # Maximum zoom level
 
 var dragging: bool = false  # Flag to check if dragging is happening
 var drag_last_position: Vector2  # Last position of the cursor when dragging
 
 func _ready():
 	# Make sure the camera is the active camera
-	self.current = true
+#	self.current = true
+	position.x = get_parent().world_width * Globals.cell_size / 2.0
+	position.y = get_parent().world_height * Globals.cell_size / 2.0
 
 func _input(event):
 	# Handle zooming with mouse wheel
