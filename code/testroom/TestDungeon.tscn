@@ -12,4 +12,6 @@ room_depth = 4
 
 [node name="DunGen" parent="." instance=ExtResource( 1 )]
 
+[node name="Interactables" type="Node2D" parent="."]
+
 [node name="Character" parent="." instance=ExtResource( 2 )]

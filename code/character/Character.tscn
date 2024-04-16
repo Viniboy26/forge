@@ -1,27 +1,157 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://code/character/Player.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/CharacterUIFont.tres" type="Theme" id=2]
+[ext_resource path="res://code/tools/gather/Hammer.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
-[node name="Character" type="Node2D"]
-
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+[node name="KinematicBody2D" type="KinematicBody2D" groups=["Player"]]
+collision_layer = 2
+collision_mask = 13
 script = ExtResource( 1 )
 
-[node name="ColorRect" type="ColorRect" parent="KinematicBody2D"]
+[node name="Primary" type="Node2D" parent="."]
+position = Vector2( 22, -25 )
+
+[node name="Hammer" parent="Primary" instance=ExtResource( 3 )]
+
+[node name="Secondary" type="Node2D" parent="."]
+position = Vector2( 0, 12 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 0.652
-margin_left = -11.0
-margin_top = -20.0
-margin_right = 11.0
-margin_bottom = 20.0
+margin_left = -19.0
+margin_top = -10.0
+margin_right = 19.0
+margin_bottom = 10.0
 color = Color( 0.137255, 0.419608, 0.815686, 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
 shape = SubResource( 1 )
 
-[node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
+[node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.6, 0.6 )
+zoom = Vector2( 0.5, 0.5 )
 smoothing_enabled = true
 smoothing_speed = 6.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Resources" type="HBoxContainer" parent="UI/Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -240.0
+margin_top = 40.0
+margin_right = -50.0
+margin_bottom = 111.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Iron" type="VBoxContainer" parent="UI/Control/Resources"]
+margin_right = 30.0
+margin_bottom = 71.0
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/Resources/Iron"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.45098, 0.45098, 0.45098, 1 )
+
+[node name="Label" type="Label" parent="UI/Control/Resources/Iron"]
+margin_top = 34.0
+margin_right = 30.0
+margin_bottom = 71.0
+theme = ExtResource( 2 )
+text = "0"
+align = 1
+
+[node name="Copper" type="VBoxContainer" parent="UI/Control/Resources"]
+margin_left = 40.0
+margin_right = 70.0
+margin_bottom = 71.0
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/Resources/Copper"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1, 0.6, 0.368627, 1 )
+
+[node name="Label" type="Label" parent="UI/Control/Resources/Copper"]
+margin_top = 34.0
+margin_right = 30.0
+margin_bottom = 71.0
+theme = ExtResource( 2 )
+text = "0"
+align = 1
+
+[node name="Tin" type="VBoxContainer" parent="UI/Control/Resources"]
+margin_left = 80.0
+margin_right = 110.0
+margin_bottom = 71.0
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/Resources/Tin"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.701961, 0.701961, 0.701961, 1 )
+
+[node name="Label" type="Label" parent="UI/Control/Resources/Tin"]
+margin_top = 34.0
+margin_right = 30.0
+margin_bottom = 71.0
+theme = ExtResource( 2 )
+text = "0"
+align = 1
+
+[node name="Bronze" type="VBoxContainer" parent="UI/Control/Resources"]
+margin_left = 120.0
+margin_right = 150.0
+margin_bottom = 71.0
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/Resources/Bronze"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1, 0.76, 0.4, 1 )
+
+[node name="Label" type="Label" parent="UI/Control/Resources/Bronze"]
+margin_top = 34.0
+margin_right = 30.0
+margin_bottom = 71.0
+theme = ExtResource( 2 )
+text = "0"
+align = 1
+
+[node name="Magic" type="VBoxContainer" parent="UI/Control/Resources"]
+margin_left = 160.0
+margin_right = 190.0
+margin_bottom = 71.0
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/Resources/Magic"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.741176, 0.6, 1, 1 )
+
+[node name="Label" type="Label" parent="UI/Control/Resources/Magic"]
+margin_top = 34.0
+margin_right = 30.0
+margin_bottom = 71.0
+theme = ExtResource( 2 )
+text = "0"
+align = 1
+
+[node name="Tools" type="HBoxContainer" parent="UI/Control"]
+margin_right = 40.0
+margin_bottom = 40.0

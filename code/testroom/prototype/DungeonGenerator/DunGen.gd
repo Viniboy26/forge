@@ -9,6 +9,7 @@ extends Node
 	We use BSP (Binary Space Partitioning) to generate the rooms and paths
 """
 
+
 #const cell_size : int = 32
 #onready var BspRoom = preload("res://code/testroom/prototype/DungeonGenerator/BspRoom.tscn")
 
@@ -31,8 +32,6 @@ var final_rooms = []
 
 var paths = []
 
-
-enum Tiles { WALL, FLOOR }
 onready var tilemap = $Tilemap
 
 
@@ -84,20 +83,20 @@ func generate_dungeon() -> void :
 func _generate_borders(width : int, height : int) -> void :
 	for x in range(width):
 		# Horizontal Borders
-		tilemap.set_cell(x, 0, Tiles.WALL)
-		tilemap.set_cell(x, height, Tiles.WALL)
+		tilemap.set_cell(x, 0, Globals.Tiles.WALL)
+		tilemap.set_cell(x, height, Globals.Tiles.WALL)
 		
 		for y in range(height):
 			# Vertical Borders
-			tilemap.set_cell(0, y, Tiles.WALL)
-			tilemap.set_cell(width, y, Tiles.WALL)
+			tilemap.set_cell(0, y, Globals.Tiles.WALL)
+			tilemap.set_cell(width, y, Globals.Tiles.WALL)
 			
 			# Fill the rest with floor
 			if x > 0 and x < width and y > 0 and y < height:
-				tilemap.set_cell(x, y, Tiles.WALL)
+				tilemap.set_cell(x, y, Globals.Tiles.WALL)
 				
 	# Fill the bottom right corner
-	tilemap.set_cell(width, height, Tiles.WALL)
+	tilemap.set_cell(width, height, Globals.Tiles.WALL)
 
 
 
@@ -219,7 +218,9 @@ func _generate_rooms() -> void :
 #			print("Room at : ", leaf.room_start, ", with size : ", leaf.room_width, "w, ", leaf.room_height, "h")
 			for x in range(1, leaf.room_width):
 				for y in range(1, leaf.room_height):
-					tilemap.set_cellv(leaf.room_start + Vector2(x,y), Tiles.FLOOR)
+					tilemap.set_cellv(leaf.room_start + Vector2(x,y), Globals.Tiles.FLOOR)
+					
+					
 		else:
 			leaf.generate_room()
 
@@ -253,20 +254,20 @@ func _generate_paths() -> void :
 		
 		for x in range(x_range) :
 #			print("Setting x floor : ", start_pos + Vector2(x,0))
-			tilemap.set_cellv(start_pos + Vector2(x , 0), Tiles.FLOOR)
+			tilemap.set_cellv(start_pos + Vector2(x , 0), Globals.Tiles.FLOOR)
 			
 			# Add one layer above and below
-			tilemap.set_cellv(start_pos + Vector2(x ,-1), Tiles.FLOOR)
-			tilemap.set_cellv(start_pos + Vector2(x , 1), Tiles.FLOOR)
+			tilemap.set_cellv(start_pos + Vector2(x ,-1), Globals.Tiles.FLOOR)
+			tilemap.set_cellv(start_pos + Vector2(x , 1), Globals.Tiles.FLOOR)
 			
 		
 		for y in range(y_range) :
 #			print("Setting y floor : ", start_pos + Vector2(0,y))
-			tilemap.set_cellv(start_pos + Vector2(0 , y), Tiles.FLOOR)
+			tilemap.set_cellv(start_pos + Vector2(0 , y), Globals.Tiles.FLOOR)
 			
 			# Add one layer to the left and right
-			tilemap.set_cellv(start_pos + Vector2( 1 , y), Tiles.FLOOR)
-			tilemap.set_cellv(start_pos + Vector2(-1 , y), Tiles.FLOOR)
+			tilemap.set_cellv(start_pos + Vector2( 1 , y), Globals.Tiles.FLOOR)
+			tilemap.set_cellv(start_pos + Vector2(-1 , y), Globals.Tiles.FLOOR)
 			
 
 
