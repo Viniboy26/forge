@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://code/testroom/prototype/DungeonGenerator/Tilemap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://code/character/Character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://code/Material/Ore.tscn" type="PackedScene" id=3]
 [ext_resource path="res://code/testroom/Testroom.gd" type="Script" id=4]
 [ext_resource path="res://code/Material/Pickup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://code/world/Torch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://code/enemy/Enemy.tscn" type="PackedScene" id=7]
 
 [node name="Testroom" type="Node2D"]
 script = ExtResource( 4 )
@@ -38,5 +40,21 @@ position = Vector2( 584, 186 )
 [node name="Pickup4" parent="Ores" instance=ExtResource( 5 )]
 position = Vector2( 504, 186 )
 
+[node name="Decor" type="Node2D" parent="."]
+
+[node name="Torch" parent="Decor" instance=ExtResource( 6 )]
+position = Vector2( 673, 248 )
+
+[node name="Torch2" parent="Decor" instance=ExtResource( 6 )]
+position = Vector2( 344, 248 )
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 440.095, 279.54 )
+
 [node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( 528, 352 )
+position = Vector2( 521, 349 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.12, 0.12, 0.12, 1 )

@@ -1,7 +1,10 @@
 extends Node2D
 
 
-export(int, 20, 100) var damage = 50
+# Different audio streams for rock_hit
+
+
+export(int, 20, 100) var damage = 20
 
 
 var swinging : bool = false
@@ -23,4 +26,14 @@ func swing() -> void :
 # Hit the ore
 func _on_Area2D_area_entered(area):
 	if area.get_parent().is_in_group("Ore"):
-		area.get_parent().take_damage(damage)
+		var destroyed = area.get_parent().take_damage(damage)
+		
+		
+		# Play a random rock hit sound
+		var total_sounds : int = 6
+		$HitRock.stream = load("res://assets/sfx/hammer/hit_rock" + String(randi() % total_sounds) + ".wav")
+		$HitRock.play()
+
+		# Play destroy sound if it got destroyed after taking this damage
+		if destroyed:
+			$Destroy.play()

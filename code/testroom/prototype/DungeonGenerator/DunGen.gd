@@ -32,6 +32,9 @@ var final_rooms = []
 
 var paths = []
 
+
+var player_room_id = 0
+
 onready var tilemap = $Tilemap
 
 
@@ -274,6 +277,9 @@ func _generate_paths() -> void :
 
 func get_spawn_position() -> Vector2 :
 	var rand_index = randi() % final_rooms.size()
+	
+	
+	player_room_id = rand_index
 	
 	return final_rooms[rand_index].center
 	

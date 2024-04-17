@@ -1,8 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://code/character/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/CharacterUIFont.tres" type="Theme" id=2]
 [ext_resource path="res://code/tools/gather/Hammer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/sfx/ores/pickup.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sprites/player/forge_bar_over.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/player/forge_bar_progress.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/player/forge_bar_under.png" type="Texture" id=7]
+[ext_resource path="res://code/character/ForgeUI.gd" type="Script" id=8]
+[ext_resource path="res://assets/fonts/ForgeUI.tres" type="Theme" id=9]
+[ext_resource path="res://assets/sfx/forging/forged.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/sfx/forging/correct_hit.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/sfx/forging/false_hit.wav" type="AudioStream" id=12]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -155,3 +164,320 @@ align = 1
 [node name="Tools" type="HBoxContainer" parent="UI/Control"]
 margin_right = 40.0
 margin_bottom = 40.0
+
+[node name="ForgeUI" type="PanelContainer" parent="UI/Control"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -140.0
+margin_top = -160.5
+margin_right = 140.0
+margin_bottom = 160.5
+script = ExtResource( 8 )
+
+[node name="Panel" type="Panel" parent="UI/Control/ForgeUI"]
+visible = false
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 223.0
+margin_bottom = 75.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/ForgeUI"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 273.0
+margin_bottom = 314.0
+custom_constants/separation = 30
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Control/ForgeUI/VBoxContainer"]
+margin_right = 266.0
+margin_bottom = 44.0
+
+[node name="TextureProgress" type="TextureProgress" parent="UI/Control/ForgeUI/VBoxContainer/CenterContainer"]
+margin_left = 25.0
+margin_right = 241.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+texture_under = ExtResource( 7 )
+texture_over = ExtResource( 5 )
+texture_progress = ExtResource( 6 )
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/ForgeUI/VBoxContainer/CenterContainer/TextureProgress"]
+margin_left = 145.0
+margin_top = 3.0
+margin_right = 149.0
+margin_bottom = 43.0
+color = Color( 0.61625, 0.85, 0.3825, 1 )
+
+[node name="Label" type="Label" parent="UI/Control/ForgeUI/VBoxContainer"]
+margin_top = 74.0
+margin_right = 266.0
+margin_bottom = 111.0
+theme = ExtResource( 2 )
+align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/ForgeUI/VBoxContainer"]
+margin_top = 141.0
+margin_right = 266.0
+margin_bottom = 246.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="ForgeChoice" type="HBoxContainer" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer"]
+margin_right = 266.0
+margin_bottom = 31.0
+alignment = 1
+
+[node name="Hammer" type="Button" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/ForgeChoice"]
+margin_right = 92.0
+margin_bottom = 31.0
+focus_neighbour_right = NodePath("../Pickaxe")
+focus_neighbour_bottom = NodePath("../../Resources/Iron/IronOre")
+theme = ExtResource( 9 )
+text = "Hammer"
+
+[node name="Pickaxe" type="Button" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/ForgeChoice"]
+margin_left = 96.0
+margin_right = 186.0
+margin_bottom = 31.0
+focus_neighbour_left = NodePath("../Hammer")
+focus_neighbour_right = NodePath("../SledgeHammer")
+focus_neighbour_bottom = NodePath("../../Resources/Iron/IronOre")
+theme = ExtResource( 9 )
+text = "Pickaxe"
+
+[node name="SledgeHammer" type="Button" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/ForgeChoice"]
+margin_left = 190.0
+margin_right = 266.0
+margin_bottom = 31.0
+focus_neighbour_left = NodePath("../Pickaxe")
+focus_neighbour_bottom = NodePath("../../Resources/Iron/IronOre")
+theme = ExtResource( 9 )
+text = "Sledge"
+
+[node name="Resources" type="HBoxContainer" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer"]
+margin_top = 41.0
+margin_right = 266.0
+margin_bottom = 71.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Iron" type="VBoxContainer" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources"]
+margin_left = 58.0
+margin_right = 88.0
+margin_bottom = 30.0
+alignment = 1
+
+[node name="IronOre" type="Button" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Iron"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+focus_neighbour_top = NodePath("../../../ForgeChoice/Hammer")
+focus_neighbour_right = NodePath("../../Copper/CopperOre")
+
+[node name="Label" type="Label" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Iron"]
+visible = false
+margin_top = 34.0
+margin_right = 30.0
+margin_bottom = 71.0
+theme = ExtResource( 2 )
+text = "0"
+align = 1
+
+[node name="Copper" type="VBoxContainer" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources"]
+margin_left = 98.0
+margin_right = 128.0
+margin_bottom = 30.0
+alignment = 1
+
+[node name="CopperOre" type="Button" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Copper"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+focus_neighbour_left = NodePath("../../Iron/IronOre")
+focus_neighbour_top = NodePath("../../../ForgeChoice/Hammer")
+focus_neighbour_right = NodePath("../../Tin/TinOre")
+
+[node name="Label" type="Label" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Copper"]
+visible = false
+margin_top = 34.0
+margin_right = 30.0
+margin_bottom = 71.0
+theme = ExtResource( 2 )
+text = "0"
+align = 1
+
+[node name="Tin" type="VBoxContainer" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources"]
+margin_left = 138.0
+margin_right = 168.0
+margin_bottom = 30.0
+alignment = 1
+
+[node name="TinOre" type="Button" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Tin"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+focus_neighbour_left = NodePath("../../Copper/CopperOre")
+focus_neighbour_top = NodePath("../../../ForgeChoice/Hammer")
+focus_neighbour_right = NodePath("../../Bronze/BronzeOre")
+
+[node name="Label" type="Label" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Tin"]
+visible = false
+margin_top = 34.0
+margin_right = 30.0
+margin_bottom = 71.0
+theme = ExtResource( 2 )
+text = "0"
+align = 1
+
+[node name="Bronze" type="VBoxContainer" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources"]
+margin_left = 178.0
+margin_right = 208.0
+margin_bottom = 30.0
+alignment = 1
+
+[node name="BronzeOre" type="Button" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Bronze"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+focus_neighbour_left = NodePath("../../Tin/TinOre")
+focus_neighbour_top = NodePath("../../../ForgeChoice/Hammer")
+
+[node name="Label" type="Label" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Bronze"]
+visible = false
+margin_top = 34.0
+margin_right = 30.0
+margin_bottom = 71.0
+theme = ExtResource( 2 )
+text = "0"
+align = 1
+
+[node name="Magic" type="VBoxContainer" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources"]
+visible = false
+margin_left = 173.0
+margin_right = 203.0
+margin_bottom = 71.0
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Magic"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.741176, 0.6, 1, 1 )
+
+[node name="Label" type="Label" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Magic"]
+margin_top = 34.0
+margin_right = 30.0
+margin_bottom = 71.0
+theme = ExtResource( 2 )
+text = "0"
+align = 1
+
+[node name="Recipe" type="HBoxContainer" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer"]
+margin_top = 81.0
+margin_right = 266.0
+margin_bottom = 105.0
+alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe"]
+margin_left = 107.0
+margin_right = 131.0
+margin_bottom = 24.0
+
+[node name="CheckBox2" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe"]
+margin_left = 135.0
+margin_right = 159.0
+margin_bottom = 24.0
+
+[node name="Recipe2" type="HBoxContainer" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer"]
+visible = false
+margin_top = 93.0
+margin_right = 378.0
+margin_bottom = 117.0
+alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe2"]
+margin_left = 149.0
+margin_right = 173.0
+margin_bottom = 24.0
+
+[node name="CheckBox2" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe2"]
+margin_left = 177.0
+margin_right = 201.0
+margin_bottom = 24.0
+
+[node name="CheckBox3" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe2"]
+margin_left = 205.0
+margin_right = 229.0
+margin_bottom = 24.0
+
+[node name="Recipe3" type="HBoxContainer" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer"]
+visible = false
+margin_top = 93.0
+margin_right = 378.0
+margin_bottom = 117.0
+alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe3"]
+margin_left = 121.0
+margin_right = 145.0
+margin_bottom = 24.0
+
+[node name="CheckBox2" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe3"]
+margin_left = 149.0
+margin_right = 173.0
+margin_bottom = 24.0
+
+[node name="CheckBox3" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe3"]
+margin_left = 177.0
+margin_right = 201.0
+margin_bottom = 24.0
+
+[node name="CheckBox4" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe3"]
+margin_left = 205.0
+margin_right = 229.0
+margin_bottom = 24.0
+
+[node name="CheckBox5" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe3"]
+margin_left = 233.0
+margin_right = 257.0
+margin_bottom = 24.0
+
+[node name="Close" type="Button" parent="UI/Control/ForgeUI/VBoxContainer"]
+margin_top = 276.0
+margin_right = 266.0
+margin_bottom = 307.0
+focus_neighbour_top = NodePath("../VBoxContainer/Resources/Iron/IronOre")
+focus_neighbour_right = NodePath("../VBoxContainer/Resources/Copper/CopperOre")
+theme = ExtResource( 9 )
+text = "Close"
+
+[node name="CorrectHit" type="AudioStreamPlayer2D" parent="UI/Control/ForgeUI"]
+position = Vector2( -372, -139.5 )
+stream = ExtResource( 12 )
+
+[node name="FalseHit" type="AudioStreamPlayer2D" parent="UI/Control/ForgeUI"]
+position = Vector2( -372, -139.5 )
+stream = ExtResource( 11 )
+
+[node name="Forged" type="AudioStreamPlayer2D" parent="UI/Control/ForgeUI"]
+position = Vector2( -372, -139.5 )
+stream = ExtResource( 10 )
+volume_db = 4.0
+
+[node name="Pickup" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = 8.0
+
+[connection signal="visibility_changed" from="UI/Control/ForgeUI" to="UI/Control/ForgeUI" method="_on_ForgeUI_visibility_changed"]
+[connection signal="pressed" from="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/ForgeChoice/Hammer" to="UI/Control/ForgeUI" method="_on_Hammer_pressed"]
+[connection signal="pressed" from="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/ForgeChoice/Pickaxe" to="UI/Control/ForgeUI" method="_on_Pickaxe_pressed"]
+[connection signal="pressed" from="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/ForgeChoice/SledgeHammer" to="UI/Control/ForgeUI" method="_on_SledgeHammer_pressed"]
+[connection signal="pressed" from="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Iron/IronOre" to="UI/Control/ForgeUI" method="_on_IronOre_pressed"]
+[connection signal="pressed" from="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Copper/CopperOre" to="UI/Control/ForgeUI" method="_on_CopperOre_pressed"]
+[connection signal="pressed" from="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Tin/TinOre" to="UI/Control/ForgeUI" method="_on_TinOre_pressed"]
+[connection signal="pressed" from="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Bronze/BronzeOre" to="UI/Control/ForgeUI" method="_on_BronzeOre_pressed"]
+[connection signal="pressed" from="UI/Control/ForgeUI/VBoxContainer/Close" to="UI/Control/ForgeUI" method="_on_Close_pressed"]

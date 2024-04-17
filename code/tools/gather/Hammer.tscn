@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://code/tools/gather/Hammer.gd" type="Script" id=1]
+[ext_resource path="res://assets/sfx/hammer/hit_rock0.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sfx/ores/destroy.wav" type="AudioStream" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -77,11 +79,14 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ false, true, false ]
+"values": [ false, true, false, false ]
 }
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 400.0
 
 [node name="Hammer" type="Node2D"]
 scale = Vector2( 0.6, 0.6 )
@@ -113,5 +118,21 @@ shape = SubResource( 1 )
 autoplay = "swing"
 anims/RESET = SubResource( 2 )
 anims/swing = SubResource( 3 )
+
+[node name="SoundArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SoundArea"]
+shape = SubResource( 4 )
+
+[node name="HitRock" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+max_distance = 400.0
+
+[node name="Swing" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Destroy" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

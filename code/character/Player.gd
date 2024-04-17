@@ -12,8 +12,17 @@ var ores = [0, 0, 0, 0, 0]
 
 var last_dir : Vector2 = Vector2.UP
 
+
+
 func _ready():
 	primary = $Primary/Hammer
+	
+	# Set ores in UI
+	var type : int = 0
+	for ore in $UI/Control/Resources.get_children():
+		ore.get_node("Label").text = String(Globals.ores[type])
+		
+		type += 1 
 
 
 
@@ -50,14 +59,14 @@ func _move_input() -> Vector2 :
 		motion.y = joy_y
 	else:
 		# Else we take keyboard commands
-		if Input.is_action_just_pressed("left"):
+		if Input.is_action_pressed("left"):
 			motion.x = -1
-		if Input.is_action_just_pressed("right"):
+		if Input.is_action_pressed("right"):
 			motion.x =  1
-		if Input.is_action_just_pressed("up"):
-			motion.x = -1
-		if Input.is_action_just_pressed("down"):
-			motion.x =  1
+		if Input.is_action_pressed("up"):
+			motion.y = -1
+		if Input.is_action_pressed("down"):
+			motion.y =  1
 		
 		
 	# Normalize the motion vector to ensure consistent speed in all directions
@@ -79,6 +88,9 @@ func _interact() -> void :
 
 func pickup(type) -> void :
 	# Increase the ore type, and update the UI
-	ores[type] += 1
+	Globals.ores[type] += 1
 	
-	$UI/Control/Resources.get_children()[type].get_node("Label").text = String(ores[type])
+	$UI/Control/Resources.get_children()[type].get_node("Label").text = String(Globals.ores[type])
+	
+	$Pickup.play()
+

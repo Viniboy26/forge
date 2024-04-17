@@ -1,6 +1,9 @@
 extends Node
 
 
+var ores = [1000, 1000, 1000, 1000, 0]
+
+
 const cell_size : int = 32
 
 enum Type {
