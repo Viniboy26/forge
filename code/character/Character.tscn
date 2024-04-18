@@ -59,6 +59,7 @@ margin_left = -240.0
 margin_top = 40.0
 margin_right = -50.0
 margin_bottom = 111.0
+grow_horizontal = 0
 custom_constants/separation = 10
 alignment = 1
 
@@ -131,7 +132,7 @@ alignment = 1
 margin_right = 30.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 30, 30 )
-color = Color( 1, 0.76, 0.4, 1 )
+color = Color( 1, 0.760784, 0.4, 1 )
 
 [node name="Label" type="Label" parent="UI/Control/Resources/Bronze"]
 margin_top = 34.0
@@ -193,8 +194,9 @@ custom_constants/separation = 30
 alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/Control/ForgeUI/VBoxContainer"]
+margin_top = 6.0
 margin_right = 266.0
-margin_bottom = 44.0
+margin_bottom = 50.0
 
 [node name="TextureProgress" type="TextureProgress" parent="UI/Control/ForgeUI/VBoxContainer/CenterContainer"]
 margin_left = 25.0
@@ -213,16 +215,16 @@ margin_bottom = 43.0
 color = Color( 0.61625, 0.85, 0.3825, 1 )
 
 [node name="Label" type="Label" parent="UI/Control/ForgeUI/VBoxContainer"]
-margin_top = 74.0
+margin_top = 80.0
 margin_right = 266.0
-margin_bottom = 111.0
-theme = ExtResource( 2 )
+margin_bottom = 105.0
+theme = ExtResource( 9 )
 align = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/ForgeUI/VBoxContainer"]
-margin_top = 141.0
+margin_top = 135.0
 margin_right = 266.0
-margin_bottom = 246.0
+margin_bottom = 240.0
 custom_constants/separation = 10
 alignment = 1
 
@@ -277,6 +279,13 @@ margin_bottom = 30.0
 rect_min_size = Vector2( 30, 30 )
 focus_neighbour_top = NodePath("../../../ForgeChoice/Hammer")
 focus_neighbour_right = NodePath("../../Copper/CopperOre")
+mouse_default_cursor_shape = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Iron/IronOre"]
+margin_right = 30.0
+margin_bottom = 30.0
+mouse_filter = 1
+color = Color( 0.45098, 0.45098, 0.45098, 1 )
 
 [node name="Label" type="Label" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Iron"]
 visible = false
@@ -300,6 +309,13 @@ rect_min_size = Vector2( 30, 30 )
 focus_neighbour_left = NodePath("../../Iron/IronOre")
 focus_neighbour_top = NodePath("../../../ForgeChoice/Hammer")
 focus_neighbour_right = NodePath("../../Tin/TinOre")
+mouse_default_cursor_shape = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Copper/CopperOre"]
+margin_right = 30.0
+margin_bottom = 30.0
+mouse_filter = 1
+color = Color( 1, 0.6, 0.368627, 1 )
 
 [node name="Label" type="Label" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Copper"]
 visible = false
@@ -323,6 +339,13 @@ rect_min_size = Vector2( 30, 30 )
 focus_neighbour_left = NodePath("../../Copper/CopperOre")
 focus_neighbour_top = NodePath("../../../ForgeChoice/Hammer")
 focus_neighbour_right = NodePath("../../Bronze/BronzeOre")
+mouse_default_cursor_shape = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Tin/TinOre"]
+margin_right = 30.0
+margin_bottom = 30.0
+mouse_filter = 1
+color = Color( 0.701961, 0.701961, 0.701961, 1 )
 
 [node name="Label" type="Label" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Tin"]
 visible = false
@@ -345,6 +368,13 @@ margin_bottom = 30.0
 rect_min_size = Vector2( 30, 30 )
 focus_neighbour_left = NodePath("../../Tin/TinOre")
 focus_neighbour_top = NodePath("../../../ForgeChoice/Hammer")
+mouse_default_cursor_shape = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Bronze/BronzeOre"]
+margin_right = 30.0
+margin_bottom = 30.0
+mouse_filter = 1
+color = Color( 1, 0.760784, 0.4, 1 )
 
 [node name="Label" type="Label" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Bronze"]
 visible = false
@@ -386,11 +416,13 @@ alignment = 1
 margin_left = 107.0
 margin_right = 131.0
 margin_bottom = 24.0
+disabled = true
 
 [node name="CheckBox2" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe"]
 margin_left = 135.0
 margin_right = 159.0
 margin_bottom = 24.0
+disabled = true
 
 [node name="Recipe2" type="HBoxContainer" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer"]
 visible = false
@@ -403,16 +435,25 @@ alignment = 1
 margin_left = 149.0
 margin_right = 173.0
 margin_bottom = 24.0
+disabled = true
 
 [node name="CheckBox2" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe2"]
 margin_left = 177.0
 margin_right = 201.0
 margin_bottom = 24.0
+disabled = true
 
 [node name="CheckBox3" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe2"]
 margin_left = 205.0
 margin_right = 229.0
 margin_bottom = 24.0
+disabled = true
+
+[node name="CheckBox4" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe2"]
+margin_left = 205.0
+margin_right = 229.0
+margin_bottom = 24.0
+disabled = true
 
 [node name="Recipe3" type="HBoxContainer" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer"]
 visible = false
@@ -425,31 +466,42 @@ alignment = 1
 margin_left = 121.0
 margin_right = 145.0
 margin_bottom = 24.0
+disabled = true
 
 [node name="CheckBox2" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe3"]
 margin_left = 149.0
 margin_right = 173.0
 margin_bottom = 24.0
+disabled = true
 
 [node name="CheckBox3" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe3"]
 margin_left = 177.0
 margin_right = 201.0
 margin_bottom = 24.0
+disabled = true
 
 [node name="CheckBox4" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe3"]
 margin_left = 205.0
 margin_right = 229.0
 margin_bottom = 24.0
+disabled = true
 
 [node name="CheckBox5" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe3"]
 margin_left = 233.0
 margin_right = 257.0
 margin_bottom = 24.0
+disabled = true
+
+[node name="CheckBox6" type="CheckBox" parent="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Recipe3"]
+margin_left = 233.0
+margin_right = 257.0
+margin_bottom = 24.0
+disabled = true
 
 [node name="Close" type="Button" parent="UI/Control/ForgeUI/VBoxContainer"]
-margin_top = 276.0
+margin_top = 270.0
 margin_right = 266.0
-margin_bottom = 307.0
+margin_bottom = 301.0
 focus_neighbour_top = NodePath("../VBoxContainer/Resources/Iron/IronOre")
 focus_neighbour_right = NodePath("../VBoxContainer/Resources/Copper/CopperOre")
 theme = ExtResource( 9 )

@@ -59,7 +59,8 @@ func _input(event):
 				
 				if recipe_step >= current_recipe.get_children().size() :
 					# Recipe completed
-					print("Recipe done !")
+					$VBoxContainer/Label.text = "Forged !"
+#					print("Recipe done !")
 					recipe_step = 0
 					
 					# Reset every check box from the recipe
@@ -69,6 +70,16 @@ func _input(event):
 					
 					$Forged.play()
 				else:
+					var message : String = "Ok"
+					if progress > 90 :
+						message = "Perfect Hit !"
+					elif progress > 80 :
+						message = "Nice !"
+					elif progress > 70 :
+						message = "Good"
+					
+					$VBoxContainer/Label.text = message
+					
 					$CorrectHit.play()
 			else:
 				# Destroy ores and restart
@@ -79,8 +90,9 @@ func _input(event):
 					checkbox.pressed = false
 				
 				$FalseHit.play()
-					
-				print("Recipe failed !")
+				
+				$VBoxContainer/Label.text = "Failed"
+#				print("Recipe failed !")
 				recipe_step = 0
 			
 			
@@ -95,8 +107,9 @@ func _input(event):
 			
 			
 		else:
+			$VBoxContainer/Label.text = "Not enough Ores"
 			# We don't have enough resources for this recipe
-			print("Not enough !")
+#			print("Not enough !")
 
 
 # ======== Switch recipes ========
@@ -105,17 +118,23 @@ func _on_Hammer_pressed():
 	current_recipe.hide()
 	current_recipe = $VBoxContainer/VBoxContainer/Recipe
 	current_recipe.show()
+	
+	$VBoxContainer/Label.text = 'Press "Use Item" to Forge'
 
 
 func _on_Pickaxe_pressed():
 	current_recipe.hide()
 	current_recipe = $VBoxContainer/VBoxContainer/Recipe2
 	current_recipe.show()
+	
+	$VBoxContainer/Label.text = 'Press "Use Item" to Forge'
 
 func _on_SledgeHammer_pressed():
 	current_recipe.hide()
 	current_recipe = $VBoxContainer/VBoxContainer/Recipe3
 	current_recipe.show()
+	
+	$VBoxContainer/Label.text = 'Press "Use Item" to Forge'
 
 
 
@@ -150,3 +169,4 @@ func _on_Close_pressed():
 func _on_ForgeUI_visibility_changed():
 	if visible :
 		$VBoxContainer/VBoxContainer/ForgeChoice/Hammer.grab_focus()
+		$VBoxContainer/Label.text = "Choose Recipe and Ore"

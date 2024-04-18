@@ -1,13 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://code/testroom/prototype/DungeonGenerator/DunGen.tscn" type="PackedScene" id=1]
 [ext_resource path="res://code/character/Character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://code/testroom/TestDungeon.gd" type="Script" id=3]
 
+[sub_resource type="Environment" id=1]
+glow_enabled = true
+glow_intensity = 0.66
+glow_strength = 0.68
+glow_bloom = 0.43
+adjustment_enabled = true
+
 [node name="TestDungeon" type="Node"]
 script = ExtResource( 3 )
-width = 300
-height = 250
+width = 320
+height = 280
 room_depth = 4
 
 [node name="DunGen" parent="." instance=ExtResource( 1 )]
@@ -20,3 +27,6 @@ room_depth = 4
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.12, 0.12, 0.12, 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )

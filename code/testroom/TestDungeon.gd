@@ -13,7 +13,7 @@ export(int, 1, 8) var room_depth = 5
 
 
 
-export var ore_spawn_rate : float = 0.02
+export var ore_spawn_rate : float = 0.01
 onready var ore_scene = preload("res://code/Material/Ore.tscn")
 
 
@@ -21,6 +21,9 @@ onready var ore_scene = preload("res://code/Material/Ore.tscn")
 onready var torch_spawn_rate : int = 20
 onready var torch_scene = preload("res://code/world/Torch.tscn")
 
+
+onready var spawner_spawn_rate : float = 0.8
+onready var enemy_spawner_scene = preload("res://code/enemy/EnemySpawner.tscn")
 
 
 func _ready():
@@ -30,6 +33,11 @@ func _ready():
 	$DunGen.bsp_depth = room_depth
 	$DunGen.generate_dungeon()
 	
+	
+	# Spawn the player at a random room
+	$Character.global_position = $DunGen.get_spawn_position() * Globals.cell_size
+	
+	
 	# Spawn the ores
 	_spawn_ores($DunGen.final_rooms)
 	
@@ -37,8 +45,8 @@ func _ready():
 	_spawn_lights($DunGen.paths)
 	
 	
-	# Spawn the player at a random room
-	$Character.global_position = $DunGen.get_spawn_position() * Globals.cell_size
+	_spawn_enemy_spawners($DunGen.final_rooms)
+	
 	
 	# Spawn a door to return right on the player
 	var return_door = dungeon_door.instance()
@@ -58,21 +66,24 @@ func _input(event):
 
 # Spawn ores in the different rooms, except for the room the player spawns in
 func _spawn_ores(rooms) -> void :
-	var id = 0
+	var id : int = 0
 	for room in rooms :
 		
 		# Only spawn if it's not the player's spawn room
 		if id != $DunGen.player_room_id:
+#			print("Room : ", id, " and ", $DunGen.player_room_id)
 			for x in range(1, room.room_width):
 					for y in range(1, room.room_height):
-						if randf() < ore_spawn_rate :
-							# Spawn a new ore at this position
-							var new_ore = ore_scene.instance()
-							var new_position = (room.room_start + Vector2(x,y)) * Globals.cell_size
-	#						print("Spawning ore at : ", new_position)
-							new_ore.global_position = new_position
-							
-							$Interactables.add_child(new_ore)
+						# Don´t spawn in the center
+						if (room.room_start + Vector2(x,y)) != room.center :
+							if randf() < ore_spawn_rate :
+								# Spawn a new ore at this position
+								var new_ore = ore_scene.instance()
+								var new_position = (room.room_start + Vector2(x,y)) * Globals.cell_size
+		#						print("Spawning ore at : ", new_position)
+								new_ore.global_position = new_position
+								
+								$Interactables.add_child(new_ore)
 		
 		id += 1
 
@@ -111,3 +122,23 @@ func _spawn_lights(paths) -> void :
 				
 				# Add the torch to the scene
 				$Decor.add_child(new_torch)
+
+
+
+func _spawn_enemy_spawners(rooms) -> void :
+	var id : int = 0
+	for room in rooms :
+		
+		# Only spawn if it's not the player's spawn room
+		if id != $DunGen.player_room_id:
+			
+			if randf() < spawner_spawn_rate :
+				# Place a spawner in the middle of the room
+				var new_enemy_spawner = enemy_spawner_scene.instance()
+				
+				new_enemy_spawner.global_position = room.center * Globals.cell_size
+				
+				$Interactables.add_child(new_enemy_spawner)
+			
+		
+		id += 1

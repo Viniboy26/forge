@@ -276,11 +276,10 @@ func _generate_paths() -> void :
 
 
 func get_spawn_position() -> Vector2 :
-	var rand_index = randi() % final_rooms.size()
+	player_room_id = randi() % (final_rooms.size())
+#	print("Final rooms size : ", final_rooms.size())
+#	print("Player room : ", player_room_id)
 	
-	
-	player_room_id = rand_index
-	
-	return final_rooms[rand_index].center
+	return final_rooms[player_room_id].center
 	
 	

@@ -25,7 +25,7 @@ func swing() -> void :
 
 # Hit the ore
 func _on_Area2D_area_entered(area):
-	if area.get_parent().is_in_group("Ore"):
+	if area.get_parent().is_in_group("Ore") or area.get_parent().is_in_group("Spawner"):
 		var destroyed = area.get_parent().take_damage(damage)
 		
 		
