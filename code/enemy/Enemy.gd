@@ -22,11 +22,12 @@ var location : Vector2 = Vector2.ZERO
 func _ready():
 	randomize()
 	
-	location = global_position
+	# Move upon spawning
+	location = _get_location()
 	
 	# Give random time to timers
-	$LocationTimer.wait_time = 0.01
-	$LocationTimer.start()
+#	$LocationTimer.wait_time = 0.01
+#	$LocationTimer.start()
 
 
 func _process(delta):
@@ -54,11 +55,13 @@ func _physics_process(delta):
 			speed = chase_speed
 		# Move to location
 		move_and_slide(direction * speed)
+		
 	else :
+		
 #		print("Arrived at location")
 		# Else we arrived and start the timer to get a new location
-		if !($LocationTimer.time_left > 0.0):
-			direction = Vector2.ZERO
+		direction = Vector2.ZERO
+		if ($LocationTimer.time_left == 0.0):
 			$LocationTimer.wait_time = rand_range(min_move_wait_time, max_move_wait_time)
 			$LocationTimer.start()
 		
