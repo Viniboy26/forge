@@ -67,7 +67,7 @@ func spawn_tin() -> void:
 
 
 func take_damage(damage : int) -> bool :
-	print("Took damage : ", damage)
+#	print("Took damage : ", damage)
 	durability -= damage
 	
 	$CPUParticles2D.emitting = true
@@ -91,6 +91,6 @@ func _destroy() -> void :
 	world.add_child(new_pickup)
 	
 	
-	print("Spawning Ore : ", new_pickup)
+#	print("Spawning Ore : ", new_pickup)
 	# Destroy this ore
 	queue_free()

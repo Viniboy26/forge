@@ -7,7 +7,6 @@ extends Control
 func _ready():
 #	$DunGen.generate_dungeon()
 	$Buttons/Button.grab_focus()
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

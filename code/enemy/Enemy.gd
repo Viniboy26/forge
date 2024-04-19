@@ -14,6 +14,9 @@ var chasing : bool = false
 var chase_speed : float = 150
 
 
+var investigating : bool = false
+
+
 var location : Vector2 = Vector2.ZERO
 
 func _ready():
@@ -22,7 +25,7 @@ func _ready():
 	location = global_position
 	
 	# Give random time to timers
-	$LocationTimer.wait_time = 0
+	$LocationTimer.wait_time = 0.01
 	$LocationTimer.start()
 
 
@@ -52,10 +55,10 @@ func _physics_process(delta):
 		# Move to location
 		move_and_slide(direction * speed)
 	else :
-		direction = Vector2.ZERO
 #		print("Arrived at location")
 		# Else we arrived and start the timer to get a new location
-		if !($LocationTimer.time_left > 0.0) :
+		if !($LocationTimer.time_left > 0.0):
+			direction = Vector2.ZERO
 			$LocationTimer.wait_time = rand_range(min_move_wait_time, max_move_wait_time)
 			$LocationTimer.start()
 		
@@ -93,6 +96,19 @@ func _get_location() -> Vector2 :
 #	print("New position : ", new_position)
 	
 	return new_position
+
+
+
+
+# Called when they hear a sound
+func check_out(sound_pos : Vector2) -> void :
+	investigating = true
+	$LocationTimer.stop()
+	
+	location = sound_pos
+	
+#	print("Investigating : ", sound_pos)
+
 
 
 

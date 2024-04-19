@@ -1,6 +1,9 @@
 extends KinematicBody2D
 
 onready var primary = null
+onready var current_tool : int = 0
+
+export var inventory_size : int = 2
 
 
 # Player speed
@@ -15,14 +18,26 @@ var last_dir : Vector2 = Vector2.UP
 
 
 func _ready():
-	primary = $Primary/Hammer
+	# Add the tools from globals
+	for new_tool in Globals.tools :
+#		print("Adding : ", new_tool)
+		new_tool.hide()
+		$Tools.add_child(new_tool)
+	
+	
+	if $Tools.get_child_count() > 0:
+		current_tool = 0
+		primary = $Tools.get_children()[current_tool]
+		$Tools.position = primary.player_offset
+		primary.show()
 	
 	# Set ores in UI
 	var type : int = 0
 	for ore in $UI/Control/Resources.get_children():
 		ore.get_node("Label").text = String(Globals.ores[type])
 		
-		type += 1 
+		type += 1
+		
 
 
 
@@ -42,8 +57,15 @@ func _physics_process(delta):
 
 func _input(event):
 	if event.is_action_pressed("attack"):
-		if primary :
+		if is_instance_valid(primary) :
 			primary.attack()
+			
+	if event.is_action_pressed("switch_tool"):
+		switch_tool()
+		
+		
+		
+		
 
 
 func _move_input() -> Vector2 :
@@ -86,6 +108,33 @@ func _interact() -> void :
 	
 
 
+func switch_tool() -> void :
+	# Hide current tool
+	if is_instance_valid(primary):
+		primary.hide()
+	
+	# Switch secondary to primary, if there is one
+	if $Tools.get_child_count() > 0 :
+		current_tool += 1
+		current_tool %= $Tools.get_child_count()
+		
+		if $Tools.get_child_count() == 1 :
+			current_tool = 0
+		
+		primary = $Tools.get_children()[current_tool]
+		
+		
+		# Set new tool position
+		$Tools.position = primary.player_offset
+		# Show current primary
+		primary.show()
+		
+	
+	if $Tools.get_child_count() > 1 :
+		$Pickup.play()
+
+
+
 func pickup(type) -> void :
 	# Increase the ore type, and update the UI
 	Globals.ores[type] += 1
@@ -94,3 +143,22 @@ func pickup(type) -> void :
 	
 	$Pickup.play()
 
+
+
+# Pickup a new tool that you crafted/found
+func give_tool(new_tool_scene) -> void :
+	var new_tool = new_tool_scene.instance()
+	
+	# Swap with current primary if full
+	new_tool.hide()
+	$Tools.add_child(new_tool)
+	
+	$Pickup.play()
+
+
+# Used to save tools across scenes
+func save_tools() -> void :
+#	print("Saving tools : ", $Tools.get_child_count())
+	Globals.tools.clear()
+	for new_tool in $Tools.get_children() :
+		Globals.tools.append(new_tool.duplicate())

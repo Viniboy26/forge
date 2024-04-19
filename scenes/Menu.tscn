@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/sfx/forge_room_soundtrack.ogg" type="AudioStream" id=1]
 [ext_resource path="res://scenes/Menu.gd" type="Script" id=2]
 [ext_resource path="res://assets/fonts/CharacterUIFont.tres" type="Theme" id=3]
+[ext_resource path="res://code/world/Torch.tscn" type="PackedScene" id=4]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -48,5 +49,29 @@ text = "Exit"
 stream = ExtResource( 1 )
 volume_db = -6.0
 autoplay = true
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -360.0
+margin_top = -68.0
+margin_right = -320.0
+margin_bottom = -28.0
+
+[node name="Torch" parent="CenterContainer" instance=ExtResource( 4 )]
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 336.0
+margin_top = -68.0
+margin_right = 376.0
+margin_bottom = -28.0
+
+[node name="Torch2" parent="CenterContainer2" instance=ExtResource( 4 )]
+rotation = 3.14159
+scale = Vector2( 1, -1 )
 
 [connection signal="pressed" from="Buttons/Button" to="." method="_on_Button_pressed"]

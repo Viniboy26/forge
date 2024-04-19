@@ -4,7 +4,8 @@ var can_enter_door : bool = false
 
 func _input(event):
 	if event.is_action_released("interact") and can_enter_door:
-		# Save ores across scenes
+		# Save tools across scenes
+		get_tree().get_nodes_in_group("Player")[0].save_tools()
 		
 		# Enter the door
 		if SceneHandler.current_scene == SceneHandler.forge_room :

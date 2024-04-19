@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://code/tools/gather/Hammer.gd" type="Script" id=1]
-[ext_resource path="res://assets/sfx/hammer/hit_rock0.wav" type="AudioStream" id=2]
-[ext_resource path="res://assets/sfx/ores/destroy.wav" type="AudioStream" id=3]
+[ext_resource path="res://code/tools/gather/Sledge.gd" type="Script" id=1]
+[ext_resource path="res://assets/sfx/ores/destroy.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sfx/hammer/hit_rock0.wav" type="AudioStream" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -88,22 +88,25 @@ tracks/2/keys = {
 [sub_resource type="CircleShape2D" id=4]
 radius = 400.0
 
-[node name="Hammer" type="Node2D" groups=["Hammer"]]
-scale = Vector2( 0.6, 0.6 )
+[node name="Sledge" type="Node2D" groups=["Sledge"]]
 script = ExtResource( 1 )
-player_offset = Vector2( 24, -30 )
+player_offset = Vector2( 24, -60 )
+damage = 500
+durability = 50
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_left = -3.0
 margin_right = 3.0
 margin_bottom = 40.0
+rect_scale = Vector2( 1, 1.5 )
 color = Color( 0.63, 0.328545, 0.00629999, 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="."]
-margin_left = -13.6667
-margin_top = -7.66667
-margin_right = 14.3333
-margin_bottom = 0.333331
+margin_left = -16.6667
+margin_top = -8.66667
+margin_right = 11.3333
+margin_bottom = -0.666669
+rect_scale = Vector2( 1.2, 1.2 )
 color = Color( 0.51, 0.51, 0.51, 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -121,6 +124,7 @@ anims/RESET = SubResource( 2 )
 anims/swing = SubResource( 3 )
 
 [node name="SoundArea" type="Area2D" parent="."]
+scale = Vector2( 2.2, 2.2 )
 collision_layer = 0
 collision_mask = 16
 
@@ -128,13 +132,13 @@ collision_mask = 16
 shape = SubResource( 4 )
 
 [node name="HitRock" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 2 )
+stream = ExtResource( 3 )
 max_distance = 400.0
 
 [node name="Swing" type="AudioStreamPlayer2D" parent="."]
 
 [node name="Destroy" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource( 2 )
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]

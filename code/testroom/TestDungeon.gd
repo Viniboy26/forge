@@ -138,6 +138,8 @@ func _spawn_enemy_spawners(rooms) -> void :
 				
 				new_enemy_spawner.global_position = room.center * Globals.cell_size
 				
+				
+				
 				$Interactables.add_child(new_enemy_spawner)
 			
 		

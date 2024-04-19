@@ -1,8 +1,8 @@
 extends Node
 
 
-var ores = [1000, 1000, 1000, 1000, 0]
-
+var ores = [5, 0, 0, 0, 0]
+var tools = []
 
 const cell_size : int = 32
 

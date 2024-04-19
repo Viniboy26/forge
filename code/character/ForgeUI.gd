@@ -1,7 +1,11 @@
 extends PanelContainer
 
 
+onready var hammer_pickup = preload("res://code/tools/gather/HammerPickup.tscn")
+onready var pickaxe_pickup = preload("res://code/tools/gather/PickaxePickup.tscn")
+onready var sledge_pickup = preload("res://code/tools/gather/SledgePickup.tscn")
 
+onready var current_pickup = hammer_pickup
 
 
 var progress_speed : int = 2
@@ -46,7 +50,7 @@ func _input(event):
 		# Test if we have enough resources for the recipe
 		var amount_needed = current_recipe.get_children().size()
 		
-		if Globals.ores[current_ore] >= amount_needed:
+		if true : #Globals.ores[current_ore] >= amount_needed:
 			
 			# Test if we're in the correct range
 			var progress = $VBoxContainer/CenterContainer/TextureProgress.value
@@ -69,6 +73,18 @@ func _input(event):
 					
 					
 					$Forged.play()
+					
+					# Drop the pickup
+					var new_pickup = current_pickup.instance()
+					var player = get_tree().get_nodes_in_group("Player")[0]
+					new_pickup.global_position = player.global_position + Vector2(0, 50)
+					
+					var world = player.get_parent().get_node("Interactables")
+#					print("World : ", world)
+					world.add_child(new_pickup)
+					
+					# Hide ourselves
+					hide()
 				else:
 					var message : String = "Ok"
 					if progress > 90 :
@@ -119,6 +135,8 @@ func _on_Hammer_pressed():
 	current_recipe = $VBoxContainer/VBoxContainer/Recipe
 	current_recipe.show()
 	
+	current_pickup = hammer_pickup
+	
 	$VBoxContainer/Label.text = 'Press "Use Item" to Forge'
 
 
@@ -127,12 +145,16 @@ func _on_Pickaxe_pressed():
 	current_recipe = $VBoxContainer/VBoxContainer/Recipe2
 	current_recipe.show()
 	
+	current_pickup = pickaxe_pickup
+	
 	$VBoxContainer/Label.text = 'Press "Use Item" to Forge'
 
 func _on_SledgeHammer_pressed():
 	current_recipe.hide()
 	current_recipe = $VBoxContainer/VBoxContainer/Recipe3
 	current_recipe.show()
+	
+	current_pickup = sledge_pickup
 	
 	$VBoxContainer/Label.text = 'Press "Use Item" to Forge'
 
