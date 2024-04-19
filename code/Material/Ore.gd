@@ -67,7 +67,7 @@ func spawn_tin() -> void:
 
 
 func take_damage(damage : int) -> bool :
-#	print("Took damage : ", damage)
+	print("Took damage : ", damage)
 	durability -= damage
 	
 	$CPUParticles2D.emitting = true

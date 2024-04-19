@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/sprites/circle_03.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/circle_05.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/world/Torch.png" type="Texture" id=3]
+[ext_resource path="res://assets/sfx/fire.wav" type="AudioStream" id=4]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.995283, 0.118182 ), 0.0, 0.0, 0, 0 ]
@@ -48,3 +49,9 @@ scale_amount = 3.0
 scale_amount_curve = SubResource( 1 )
 color = Color( 1, 1, 1, 0.862745 )
 color_ramp = SubResource( 2 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 6, -7 )
+stream = ExtResource( 4 )
+autoplay = true
+max_distance = 800.0

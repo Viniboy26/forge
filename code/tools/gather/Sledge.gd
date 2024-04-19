@@ -7,7 +7,7 @@ export var player_offset : Vector2 = Vector2.RIGHT
 
 
 export(int, 20, 10000) var damage = 20
-export(int, 15, 50) var durability = 20
+export(int, 15, 1000) var durability = 20
 
 
 var swinging : bool = false

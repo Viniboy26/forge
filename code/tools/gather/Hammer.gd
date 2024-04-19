@@ -6,7 +6,7 @@ extends Node2D
 export var player_offset : Vector2 = Vector2.RIGHT
 
 export(int, 20, 100) var damage = 20
-export(int, 15, 50) var durability = 20
+export(int, 15, 100) var durability = 20
 
 
 var swinging : bool = false

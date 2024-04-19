@@ -22,8 +22,12 @@ onready var torch_spawn_rate : int = 20
 onready var torch_scene = preload("res://code/world/Torch.tscn")
 
 
-onready var spawner_spawn_rate : float = 0.8
+onready var spawner_spawn_rate : float = 0.6
 onready var enemy_spawner_scene = preload("res://code/enemy/EnemySpawner.tscn")
+
+
+onready var anvil_scene = preload("res://code/world/Door/Anvil.tscn")
+
 
 
 func _ready():
@@ -36,6 +40,11 @@ func _ready():
 	
 	# Spawn the player at a random room
 	$Character.global_position = $DunGen.get_spawn_position() * Globals.cell_size
+	
+	# Spawn anvil in dungeon
+#	var new_anvil = anvil_scene.instance()
+#	new_anvil.global_position = $DunGen.get_anvil_position() * Globals.cell_size
+#	$Interactables.add_child(new_anvil)
 	
 	
 	# Spawn the ores

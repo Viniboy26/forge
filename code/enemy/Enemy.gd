@@ -7,6 +7,9 @@ export var min_move_wait_time : float = 2.0
 export var max_move_wait_time : float = 10.0
 
 
+export var despawn_time : int = 180
+
+
 
 var move_speed : float = 100
 
@@ -21,6 +24,11 @@ var location : Vector2 = Vector2.ZERO
 
 func _ready():
 	randomize()
+	
+	# Set despawn timer
+	$Despawn.wait_time = despawn_time
+	
+	
 	
 	# Move upon spawning
 	location = _get_location()
@@ -57,8 +65,8 @@ func _physics_process(delta):
 		move_and_slide(direction * speed)
 		
 	else :
-		
 #		print("Arrived at location")
+		
 		# Else we arrived and start the timer to get a new location
 		direction = Vector2.ZERO
 		if ($LocationTimer.time_left == 0.0):
@@ -131,3 +139,8 @@ func out_of_world(pos : Vector2) -> bool :
 	var y_in_bound = (pos.y < (world.height * Globals.cell_size)) and (pos.y > 0)
 	var in_bounds = (!x_in_bound or !y_in_bound)
 	return !in_bounds
+
+
+func _on_Despawn_timeout():
+	# Despawn enemy
+	queue_free()

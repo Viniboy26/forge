@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/sfx/ores/destroy.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/sfx/hammer/hit_rock0.wav" type="AudioStream" id=2]
 [ext_resource path="res://code/tools/gather/Pickaxe.gd" type="Script" id=3]
+[ext_resource path="res://assets/sfx/pickaxe/swing.wav" type="AudioStream" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 35.0
@@ -45,6 +46,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Swing:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "swing"
@@ -85,6 +98,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [ false, true, false, false ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Swing:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 400.0
@@ -122,7 +147,7 @@ anims/RESET = SubResource( 2 )
 anims/swing = SubResource( 3 )
 
 [node name="SoundArea" type="Area2D" parent="."]
-scale = Vector2( 1.6, 1.6 )
+scale = Vector2( 1.4, 1.4 )
 collision_layer = 0
 collision_mask = 16
 
@@ -134,6 +159,7 @@ stream = ExtResource( 2 )
 max_distance = 400.0
 
 [node name="Swing" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
 
 [node name="Destroy" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )

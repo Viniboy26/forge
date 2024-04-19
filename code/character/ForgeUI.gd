@@ -26,6 +26,11 @@ onready var current_recipe = $VBoxContainer/VBoxContainer/Recipe
 var current_ore : int = 0
 
 
+# Stats for the final forged tool
+var final_damage : int = 0
+var final_durability : int = 0
+
+
 func _physics_process(delta):
 	update_bar()
 
@@ -45,12 +50,14 @@ func update_bar() -> void :
 
 
 
+
+
 func _input(event):
 	if event.is_action_pressed("attack") and visible :
 		# Test if we have enough resources for the recipe
 		var amount_needed = current_recipe.get_children().size()
 		
-		if true : #Globals.ores[current_ore] >= amount_needed:
+		if Globals.ores[current_ore] > 0 : #Globals.ores[current_ore] >= amount_needed:
 			
 			# Test if we're in the correct range
 			var progress = $VBoxContainer/CenterContainer/TextureProgress.value
@@ -77,7 +84,12 @@ func _input(event):
 					# Drop the pickup
 					var new_pickup = current_pickup.instance()
 					var player = get_tree().get_nodes_in_group("Player")[0]
-					new_pickup.global_position = player.global_position + Vector2(0, 50)
+					new_pickup.global_position = player.global_position + Vector2(0, 100)
+					
+					# Give it the final stats
+					final_durability += Globals.ore_stats[current_ore].x
+					final_damage += Globals.ore_stats[current_ore].y
+					new_pickup.stats = Vector2(final_durability, final_damage)
 					
 					var world = player.get_parent().get_node("Interactables")
 #					print("World : ", world)
@@ -85,6 +97,8 @@ func _input(event):
 					
 					# Hide ourselves
 					hide()
+					final_durability = 0
+					final_damage = 0
 				else:
 					var message : String = "Ok"
 					if progress > 90 :
@@ -97,6 +111,11 @@ func _input(event):
 					$VBoxContainer/Label.text = message
 					
 					$CorrectHit.play()
+					
+					# Add to the final stats of the tool
+					final_durability += Globals.ore_stats[current_ore].x
+					final_damage += Globals.ore_stats[current_ore].y
+					
 			else:
 				# Destroy ores and restart
 				current_recipe.get_children()[recipe_step].pressed = false
@@ -110,6 +129,9 @@ func _input(event):
 				$VBoxContainer/Label.text = "Failed"
 #				print("Recipe failed !")
 				recipe_step = 0
+				
+				final_durability = 0
+				final_damage = 0
 			
 			
 			
@@ -126,6 +148,10 @@ func _input(event):
 			$VBoxContainer/Label.text = "Not enough Ores"
 			# We don't have enough resources for this recipe
 #			print("Not enough !")
+
+
+
+
 
 
 # ======== Switch recipes ========
@@ -183,6 +209,12 @@ func _on_BronzeOre_pressed():
 	current_ore = Globals.Type.BRONZE
 
 
+func _on_MagicOre_pressed():
+	progress_speed = 10
+	current_ore = Globals.Type.MAGIC
+
+
+
 # Close this forge UI
 func _on_Close_pressed():
 	hide()
@@ -191,4 +223,4 @@ func _on_Close_pressed():
 func _on_ForgeUI_visibility_changed():
 	if visible :
 		$VBoxContainer/VBoxContainer/ForgeChoice/Hammer.grab_focus()
-		$VBoxContainer/Label.text = "Choose Recipe and Ore"
+		$VBoxContainer/Label.text = "Choose Recipe & Ore"

@@ -146,8 +146,14 @@ func pickup(type) -> void :
 
 
 # Pickup a new tool that you crafted/found
-func give_tool(new_tool_scene) -> void :
+func give_tool(new_tool_scene, stats) -> void :
 	var new_tool = new_tool_scene.instance()
+	
+	# Set stats
+	new_tool.durability = stats.x
+	new_tool.damage = stats.y
+	
+	print("New stats : ", stats)
 	
 	# Swap with current primary if full
 	new_tool.hide()
@@ -162,3 +168,4 @@ func save_tools() -> void :
 	Globals.tools.clear()
 	for new_tool in $Tools.get_children() :
 		Globals.tools.append(new_tool.duplicate())
+
