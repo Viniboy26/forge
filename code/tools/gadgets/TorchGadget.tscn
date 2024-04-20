@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/sprites/circle_03.png" type="Texture" id=1]
+[ext_resource path="res://assets/sfx/fire.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sprites/circle_05.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/world/Torch.png" type="Texture" id=4]
+[ext_resource path="res://code/tools/gadgets/TorchGadget.gd" type="Script" id=5]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 160.0
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.995283, 0.118182 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.154613, 0.478803, 0.638404, 0.817955, 1 )
+colors = PoolColorArray( 0.831373, 0.215686, 0.215686, 1, 0.831373, 0.215686, 0.215686, 1, 0.983016, 0.75194, 0.0756806, 1, 1, 0.812, 0.06, 1, 0.0545455, 0.0442909, 0.00327273, 1, 0, 0, 0, 1 )
+
+[node name="TorchGadget" type="Node2D"]
+position = Vector2( 20, 14 )
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 2 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 4 )
+
+[node name="Light2D" type="Light2D" parent="."]
+visible = false
+texture = ExtResource( 1 )
+texture_scale = 0.4
+color = Color( 1, 0.705882, 0.45098, 1 )
+energy = 0.5
+shadow_enabled = true
+
+[node name="RepellerLight" type="Light2D" parent="."]
+texture = ExtResource( 3 )
+texture_scale = 1.8
+color = Color( 1, 0.705882, 0.45098, 1 )
+shadow_enabled = true
+
+[node name="DetectionArea" type="Area2D" parent="RepellerLight"]
+collision_layer = 0
+collision_mask = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RepellerLight/DetectionArea"]
+shape = SubResource( 3 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2( 6, -7 )
+amount = 50
+lifetime = 0.5
+explosiveness = 0.2
+emission_shape = 1
+emission_sphere_radius = 6.0
+direction = Vector2( 0, -1 )
+gravity = Vector2( 0, 0 )
+initial_velocity = 20.0
+initial_velocity_random = 0.3
+scale_amount = 3.0
+scale_amount_curve = SubResource( 1 )
+color = Color( 1, 1, 1, 0.862745 )
+color_ramp = SubResource( 2 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 6, -7 )
+stream = ExtResource( 2 )
+max_distance = 1000.0
+
+[connection signal="body_entered" from="RepellerLight/DetectionArea" to="." method="_on_DetectionArea_body_entered"]
+[connection signal="body_exited" from="RepellerLight/DetectionArea" to="." method="_on_DetectionArea_body_exited"]
