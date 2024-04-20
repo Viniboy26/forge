@@ -33,6 +33,8 @@ var final_durability : int = 0
 
 func _physics_process(delta):
 	update_bar()
+	
+	
 
 
 
@@ -47,8 +49,6 @@ func update_bar() -> void :
 		
 		up = ($VBoxContainer/CenterContainer/TextureProgress.value <= 0)
 #	$VBoxContainer/TextureProgress.value %= max_progress
-
-
 
 
 
@@ -84,7 +84,7 @@ func _input(event):
 					# Drop the pickup
 					var new_pickup = current_pickup.instance()
 					var player = get_tree().get_nodes_in_group("Player")[0]
-					new_pickup.global_position = player.global_position + Vector2(0, 100)
+					new_pickup.global_position = player.global_position + Vector2(0, 80)
 					
 					# Give it the final stats
 					final_durability += Globals.ore_stats[current_ore].x

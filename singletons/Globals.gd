@@ -3,7 +3,7 @@ extends Node
 
 # Stats = (durability, damage)
 var ore_stats = [Vector2(10, 10), Vector2(20, 10), Vector2(10, 20), Vector2(50, 50), Vector2(200, 200)]
-var ores = [2, 1, 1, 0, 0]
+var ores = [2, 1, 1, 0, 5]
 
 
 var sanity : float = 100.0

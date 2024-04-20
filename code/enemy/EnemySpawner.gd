@@ -45,21 +45,19 @@ func take_damage(damage : int) -> bool :
 
 # Destroy this Spawner and drop the pickup
 func _destroy() -> void :
-	# Drop Magic ore ?
-	if false :
-		var new_pickup = new_pickup.instance()
-		
-		# Set it's variables
-		new_pickup.position = position
-		new_pickup.type = type
-		
-		# Add it to the scene
-		var world = get_parent()
-		world.add_child(new_pickup)
-		
-		
+	# Spawn a magic ore
+	var new_pickup = new_pickup.instance()
+	
+	# Set it's variables
+	new_pickup.position = position
+	new_pickup.type = Globals.Type.MAGIC
+	
+	# Add it to the scene
+	var world = get_parent()
+	world.add_child(new_pickup)
+	
+	
 #		print("Spawning Ore : ", new_pickup)
-		
 		
 		
 	# Destroy this Spawner

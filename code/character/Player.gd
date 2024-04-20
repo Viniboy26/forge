@@ -175,6 +175,8 @@ func save_tools() -> void :
 
 
 
+
+
 # Sanity gets drained when enemy gets close, and our speed gets slowed
 func drain_sanity() -> void :
 	if Globals.sanity > 0.0 :
@@ -192,3 +194,17 @@ func restore_sanity() -> void :
 		Globals.sanity += 0.2
 		
 		get_parent().sanity_check()
+		
+
+
+
+# Give magic ores to the exit, to reconstruct it
+func give_magic_to_exit() -> int :
+	var magic_ores : int = Globals.ores[Globals.Type.MAGIC]
+	
+	# Set them to 0 and update UI
+	Globals.ores[Globals.Type.MAGIC] = 0
+	$UI/Control/Resources/Magic/Label.text = String(0)
+	
+	# Return the original amount
+	return magic_ores
