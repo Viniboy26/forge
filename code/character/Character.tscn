@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://code/character/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/CharacterUIFont.tres" type="Theme" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://assets/sprites/player/ProgressBorder.png" type="Texture" id=16]
 [ext_resource path="res://assets/sprites/player/ProgressUnder.png" type="Texture" id=17]
 [ext_resource path="res://assets/sprites/player/Progress.png" type="Texture" id=18]
+[ext_resource path="res://assets/sfx/lose_laugh.wav" type="AudioStream" id=19]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -110,6 +111,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("LoseLaugh:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "Transform"
@@ -184,6 +197,18 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("LoseLaugh:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [node name="KinematicBody2D" type="KinematicBody2D" groups=["Player"]]
@@ -1092,6 +1117,10 @@ volume_db = 15.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 5 )
 anims/Transform = SubResource( 4 )
+
+[node name="LoseLaugh" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+volume_db = -3.0
 
 [connection signal="visibility_changed" from="UI/Control/ForgeUI" to="UI/Control/ForgeUI" method="_on_ForgeUI_visibility_changed"]
 [connection signal="pressed" from="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/ForgeChoice/Hammer" to="UI/Control/ForgeUI" method="_on_Hammer_pressed"]

@@ -277,6 +277,8 @@ func _generate_paths() -> void :
 
 
 
+
+
 func get_spawn_position() -> Vector2 :
 	player_room_id = randi() % (final_rooms.size())
 #	print("Final rooms size : ", final_rooms.size())

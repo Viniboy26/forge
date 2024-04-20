@@ -47,6 +47,8 @@ func _ready():
 	# Spawn anvil in dungeon
 	var new_anvil = anvil_scene.instance()
 	new_anvil.global_position = $DunGen.get_anvil_position() * Globals.cell_size
+	# Start it's pinging sound
+	new_anvil.get_node("Timer").start()
 	$Interactables.add_child(new_anvil)
 	
 	
@@ -148,7 +150,7 @@ func _spawn_enemy_spawners(rooms) -> void :
 	for room in rooms :
 		
 		# Only spawn if it's not the player's, anvil's or oven's room
-		if id != $DunGen.player_room_id and id != $DunGen.anvil_room_id :
+		if (id != $DunGen.player_room_id and id != $DunGen.anvil_room_id and id != $DunGen.oven_room_id) :
 			
 			if randf() < spawner_spawn_rate :
 				# Place a spawner in the middle of the room
