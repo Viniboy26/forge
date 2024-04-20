@@ -45,16 +45,16 @@ func _ready():
 
 
 func _physics_process(delta):
-	
-	
+	if Globals.sanity > 0.0 :
+		pass
 	var direction = _move_input()
 	if direction != Vector2.ZERO:
 		last_dir = direction
-		
+			
 	# Move the character
 	move_and_slide(direction)
-	
-	# Rotate the character
+		
+		# Rotate the character
 	rotate_character(last_dir)
 
 
@@ -184,7 +184,10 @@ func drain_sanity() -> void :
 		
 		get_parent().sanity_check()
 	else :
-		print("You got lost !")
+		# Swap to ghost body
+		if !$AnimationPlayer.is_playing() and !$LoseBody.visible:
+			$AnimationPlayer.play("Transform")
+#			print("You got lost !")
 		
 
 
@@ -208,3 +211,27 @@ func give_magic_to_exit() -> int :
 	
 	# Return the original amount
 	return magic_ores
+
+
+
+
+# Pop lose UI on lose animation finished
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "Transform" :
+		# Pause the game and show lose UI
+#		get_tree().paused = true
+		
+		$UI/Control/LoseUI.show()
+		$UI/Control/LoseUI/VBoxContainer/HBoxContainer/Retry.grab_focus()
+
+
+
+# Retry or go to menu
+func _on_Retry_pressed():
+	Globals.reset_variables()
+	SceneHandler.go_to(SceneHandler.forge_room)
+
+
+func _on_Home_pressed():
+	Globals.reset_variables()
+	SceneHandler.go_to(SceneHandler.menu)

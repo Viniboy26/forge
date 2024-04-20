@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://code/character/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/CharacterUIFont.tres" type="Theme" id=2]
+[ext_resource path="res://assets/sprites/circle_05.png" type="Texture" id=3]
 [ext_resource path="res://assets/sfx/ores/pickup.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/sprites/player/forge_bar_over.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/player/forge_bar_progress.png" type="Texture" id=6]
@@ -11,8 +12,13 @@
 [ext_resource path="res://assets/sfx/forging/forged.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/sfx/forging/correct_hit.wav" type="AudioStream" id=11]
 [ext_resource path="res://assets/sfx/forging/false_hit.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/sprites/enemy/template.png" type="Texture" id=13]
+[ext_resource path="res://code/character/UI.gd" type="Script" id=14]
 
 [sub_resource type="CapsuleShape2D" id=1]
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0.454545, 0.0100852 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.936364 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.15, 0.15, 0.15, 0.901961 )
@@ -25,6 +31,156 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tools:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LoseBody:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ColorRect:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.137255, 0.419608, 0.815686, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("LoseBody:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Transform"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tools:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LoseBody:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ColorRect:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.137255, 0.419608, 0.815686, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("LoseBody:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [node name="KinematicBody2D" type="KinematicBody2D" groups=["Player"]]
 collision_layer = 2
@@ -48,6 +204,36 @@ color = Color( 0.137255, 0.419608, 0.815686, 1 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
+[node name="LoseBody" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite" type="Sprite" parent="LoseBody"]
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 13 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="LoseBody"]
+amount = 10
+lifetime = 0.4
+explosiveness = 0.1
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 15.0
+gravity = Vector2( 0, 0 )
+linear_accel = 200.0
+linear_accel_random = 0.3
+radial_accel = 5.0
+radial_accel_random = 0.2
+scale_amount = 3.0
+scale_amount_curve = SubResource( 3 )
+color = Color( 1, 0.956667, 0.48, 1 )
+
+[node name="Light2D2" type="Light2D" parent="LoseBody"]
+position = Vector2( -1, 0 )
+texture = ExtResource( 3 )
+texture_scale = 0.8
+color = Color( 1, 0.992157, 0.45098, 1 )
+energy = 0.8
+
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.5, 0.5 )
@@ -55,6 +241,7 @@ smoothing_enabled = true
 smoothing_speed = 6.0
 
 [node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource( 14 )
 
 [node name="Control" type="Control" parent="UI"]
 anchor_right = 1.0
@@ -580,9 +767,66 @@ stream = ExtResource( 11 )
 stream = ExtResource( 10 )
 volume_db = 4.0
 
+[node name="LoseUI" type="PanelContainer" parent="UI/Control"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -140.0
+margin_top = -160.5
+margin_right = 140.0
+margin_bottom = 160.5
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/LoseUI"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 321.0
+margin_bottom = 319.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="message" type="Label" parent="UI/Control/LoseUI/VBoxContainer"]
+margin_top = 99.0
+margin_right = 319.0
+margin_bottom = 136.0
+theme = ExtResource( 2 )
+text = "You Lost Your Sanity"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Control/LoseUI/VBoxContainer"]
+margin_top = 186.0
+margin_right = 319.0
+margin_bottom = 217.0
+theme = ExtResource( 9 )
+alignment = 1
+
+[node name="Retry" type="Button" parent="UI/Control/LoseUI/VBoxContainer/HBoxContainer"]
+margin_left = 89.0
+margin_right = 163.0
+margin_bottom = 31.0
+focus_neighbour_right = NodePath("../Home")
+text = "Retry"
+
+[node name="Home" type="Button" parent="UI/Control/LoseUI/VBoxContainer/HBoxContainer"]
+margin_left = 167.0
+margin_right = 230.0
+margin_bottom = 31.0
+focus_neighbour_left = NodePath("../Retry")
+text = "Menu"
+
 [node name="Pickup" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 volume_db = 15.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 5 )
+anims/Transform = SubResource( 4 )
 
 [connection signal="visibility_changed" from="UI/Control/ForgeUI" to="UI/Control/ForgeUI" method="_on_ForgeUI_visibility_changed"]
 [connection signal="pressed" from="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/ForgeChoice/Hammer" to="UI/Control/ForgeUI" method="_on_Hammer_pressed"]
@@ -594,3 +838,6 @@ volume_db = 15.0
 [connection signal="pressed" from="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Bronze/BronzeOre" to="UI/Control/ForgeUI" method="_on_BronzeOre_pressed"]
 [connection signal="pressed" from="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/Resources/Magic/MagicOre" to="UI/Control/ForgeUI" method="_on_MagicOre_pressed"]
 [connection signal="pressed" from="UI/Control/ForgeUI/VBoxContainer/Close" to="UI/Control/ForgeUI" method="_on_Close_pressed"]
+[connection signal="pressed" from="UI/Control/LoseUI/VBoxContainer/HBoxContainer/Retry" to="." method="_on_Retry_pressed"]
+[connection signal="pressed" from="UI/Control/LoseUI/VBoxContainer/HBoxContainer/Home" to="." method="_on_Home_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

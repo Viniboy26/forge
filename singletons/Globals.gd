@@ -45,3 +45,10 @@ func type_to_material(type : int) -> String :
 func _input(event) :
 	if event.is_action_pressed("full_screen"):
 		OS.window_fullscreen = !OS.window_fullscreen
+
+
+
+func reset_variables() -> void :
+	ores = [2, 1, 1, 0, 0]
+	sanity = 100.0
+	tools = []
