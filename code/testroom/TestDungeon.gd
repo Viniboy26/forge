@@ -92,8 +92,8 @@ func _spawn_ores(rooms) -> void :
 		# Only spawn if it's not the player's spawn room
 		if id != $DunGen.player_room_id:
 #			print("Room : ", id, " and ", $DunGen.player_room_id)
-			for x in range(1, room.room_width):
-					for y in range(1, room.room_height):
+			for x in range(2, room.room_width - 2):
+					for y in range(2, room.room_height - 2):
 						# Don´t spawn in the center
 						if (room.room_start + Vector2(x,y)) != room.center :
 							if randf() < ore_spawn_rate :
