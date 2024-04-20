@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/sprites/enemy/template.png" type="Texture" id=1]
 [ext_resource path="res://code/enemy/Enemy.gd" type="Script" id=2]
@@ -41,6 +41,9 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 75.0
 
 [node name="Enemy" type="KinematicBody2D" groups=["Enemy"]]
 collision_layer = 16
@@ -89,9 +92,18 @@ texture_scale = 0.8
 color = Color( 1, 0.992157, 0.45098, 1 )
 energy = 0.8
 
+[node name="DetectionArea" type="Area2D" parent="Light2D2"]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Light2D2/DetectionArea"]
+shape = SubResource( 5 )
+
 [node name="Despawn" type="Timer" parent="."]
 wait_time = 180.0
 autostart = true
 
 [connection signal="timeout" from="LocationTimer" to="." method="_on_LocationTimer_timeout"]
+[connection signal="body_entered" from="Light2D2/DetectionArea" to="." method="_on_DetectionArea_body_entered"]
+[connection signal="body_exited" from="Light2D2/DetectionArea" to="." method="_on_DetectionArea_body_exited"]
 [connection signal="timeout" from="Despawn" to="." method="_on_Despawn_timeout"]

@@ -8,10 +8,8 @@ radius = 35.0
 [node name="Anvil" type="Node2D"]
 
 [node name="Anvil" type="ColorRect" parent="."]
-margin_left = 412.0
-margin_top = 78.0
-margin_right = 452.0
-margin_bottom = 103.0
+margin_right = 40.0
+margin_bottom = 25.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="Polygon2D" type="Polygon2D" parent="Anvil"]

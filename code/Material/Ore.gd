@@ -55,11 +55,14 @@ func spawn_iron() -> void:
 func spawn_copper() -> void:
 #	$Material/Copper.show()
 	
+	durability = 200
 	type = Globals.Type.COPPER
+	
 	
 func spawn_tin() -> void:
 #	$Material/Tin.show()
 	
+	durability = 150
 	type = Globals.Type.TIN
 
 

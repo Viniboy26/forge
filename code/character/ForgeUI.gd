@@ -163,7 +163,7 @@ func _on_Hammer_pressed():
 	
 	current_pickup = hammer_pickup
 	
-	$VBoxContainer/Label.text = 'Press "Use Item" to Forge'
+	$VBoxContainer/Label.text = '"Use Tool" to Forge'
 
 
 func _on_Pickaxe_pressed():
@@ -173,7 +173,7 @@ func _on_Pickaxe_pressed():
 	
 	current_pickup = pickaxe_pickup
 	
-	$VBoxContainer/Label.text = 'Press "Use Item" to Forge'
+	$VBoxContainer/Label.text = '"Use Tool" to Forge'
 
 func _on_SledgeHammer_pressed():
 	current_recipe.hide()
@@ -182,7 +182,7 @@ func _on_SledgeHammer_pressed():
 	
 	current_pickup = sledge_pickup
 	
-	$VBoxContainer/Label.text = 'Press "Use Item" to Forge'
+	$VBoxContainer/Label.text = '"Use Tool" to Forge'
 
 
 

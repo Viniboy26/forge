@@ -19,8 +19,19 @@ var chase_speed : float = 150
 
 var investigating : bool = false
 
+var repelled : bool = false
+
 
 var location : Vector2 = Vector2.ZERO
+
+
+
+
+var player = null
+
+
+
+
 
 func _ready():
 	randomize()
@@ -45,6 +56,13 @@ func _process(delta):
 
 
 func _physics_process(delta):
+	
+	# Just go the the player if we're chasing
+	if chasing and !repelled :
+		location = player.global_position
+		
+		# Drain player sanity
+		player.drain_sanity()
 	
 	# Get distance to new location to see if we have to move
 	var new_dir = (location - global_position)
@@ -122,10 +140,27 @@ func check_out(sound_pos : Vector2) -> void :
 
 
 
+# Get repelled by lights
+func repel(light_pos : Vector2) -> void :
+	var repel_dir = (global_position - light_pos)
+	if repel_dir.length() > 10 :
+		location = global_position + repel_dir
+	else :
+		location = _get_location()
+	
+
+
+
+
+
+
+
+
 
 # Get a new location
 func _on_LocationTimer_timeout():
-	location = _get_location()
+	if !chasing :
+		location = _get_location()
 	
 #	# Only get a new locatino if it's in the world limits
 #	while out_of_world(location) :
@@ -144,3 +179,17 @@ func out_of_world(pos : Vector2) -> bool :
 func _on_Despawn_timeout():
 	# Despawn enemy
 	queue_free()
+
+
+
+# Check if we need to chase the player
+func _on_DetectionArea_body_entered(body):
+	if body.is_in_group("Player"):
+		player = body
+		chasing = true
+
+
+func _on_DetectionArea_body_exited(body):
+	if body.is_in_group("Player"):
+		player = null
+		chasing = false

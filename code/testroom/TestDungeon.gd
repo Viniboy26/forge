@@ -18,11 +18,11 @@ onready var ore_scene = preload("res://code/Material/Ore.tscn")
 
 
 
-onready var torch_spawn_rate : int = 20
+onready var torch_spawn_rate : int = 30
 onready var torch_scene = preload("res://code/world/Torch.tscn")
 
 
-onready var spawner_spawn_rate : float = 0.6
+onready var spawner_spawn_rate : float = 0.9
 onready var enemy_spawner_scene = preload("res://code/enemy/EnemySpawner.tscn")
 
 
@@ -42,9 +42,9 @@ func _ready():
 	$Character.global_position = $DunGen.get_spawn_position() * Globals.cell_size
 	
 	# Spawn anvil in dungeon
-#	var new_anvil = anvil_scene.instance()
-#	new_anvil.global_position = $DunGen.get_anvil_position() * Globals.cell_size
-#	$Interactables.add_child(new_anvil)
+	var new_anvil = anvil_scene.instance()
+	new_anvil.global_position = $DunGen.get_anvil_position() * Globals.cell_size
+	$Interactables.add_child(new_anvil)
 	
 	
 	# Spawn the ores
@@ -116,7 +116,7 @@ func _spawn_lights(paths) -> void :
 			if x % torch_spawn_rate == 0 :
 	#			print("Setting x floor : ", start_pos + Vector2(x,0))
 				var new_torch = torch_scene.instance()
-				new_torch.position = (start_pos + Vector2(x , 1)) * Globals.cell_size
+				new_torch.position = (start_pos + Vector2(x , 0)) * Globals.cell_size
 				
 				# Add the torch to the scene
 				$Decor.add_child(new_torch)
@@ -127,7 +127,7 @@ func _spawn_lights(paths) -> void :
 			if y % torch_spawn_rate == 0 :
 	#			print("Setting y floor : ", start_pos + Vector2(0,y))
 				var new_torch = torch_scene.instance()
-				new_torch.position = (start_pos + Vector2(-1 , y)) * Globals.cell_size
+				new_torch.position = (start_pos + Vector2(0 , y)) * Globals.cell_size
 				
 				# Add the torch to the scene
 				$Decor.add_child(new_torch)
@@ -138,8 +138,8 @@ func _spawn_enemy_spawners(rooms) -> void :
 	var id : int = 0
 	for room in rooms :
 		
-		# Only spawn if it's not the player's spawn room
-		if id != $DunGen.player_room_id:
+		# Only spawn if it's not the player's, anvil's or oven's room
+		if id != $DunGen.player_room_id and id != $DunGen.anvil_room_id :
 			
 			if randf() < spawner_spawn_rate :
 				# Place a spawner in the middle of the room
@@ -153,3 +153,11 @@ func _spawn_enemy_spawners(rooms) -> void :
 			
 		
 		id += 1
+
+
+
+
+func sanity_check() -> void :
+	var darkness = range_lerp(float(Globals.sanity), 0.0, 100.0, 0.0, 0.15)
+#	print("Darkness : ", darkness)
+	$CanvasModulate.color.v = darkness

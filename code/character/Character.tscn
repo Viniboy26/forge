@@ -171,8 +171,15 @@ text = "0"
 align = 1
 
 [node name="Tools" type="HBoxContainer" parent="UI/Control"]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -49.0
+margin_right = 20.0
+margin_bottom = -9.0
+alignment = 1
 
 [node name="ForgeUI" type="PanelContainer" parent="UI/Control"]
 visible = false
@@ -563,16 +570,13 @@ text = "Close"
 icon_align = 1
 expand_icon = true
 
-[node name="CorrectHit" type="AudioStreamPlayer2D" parent="UI/Control/ForgeUI"]
-position = Vector2( -372, -139.5 )
+[node name="CorrectHit" type="AudioStreamPlayer" parent="UI/Control/ForgeUI"]
 stream = ExtResource( 12 )
 
-[node name="FalseHit" type="AudioStreamPlayer2D" parent="UI/Control/ForgeUI"]
-position = Vector2( -372, -139.5 )
+[node name="FalseHit" type="AudioStreamPlayer" parent="UI/Control/ForgeUI"]
 stream = ExtResource( 11 )
 
-[node name="Forged" type="AudioStreamPlayer2D" parent="UI/Control/ForgeUI"]
-position = Vector2( -372, -139.5 )
+[node name="Forged" type="AudioStreamPlayer" parent="UI/Control/ForgeUI"]
 stream = ExtResource( 10 )
 volume_db = 4.0
 

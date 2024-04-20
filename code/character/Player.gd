@@ -6,6 +6,9 @@ onready var current_tool : int = 0
 export var inventory_size : int = 2
 
 
+onready var sanity : int = 100
+
+
 # Player speed
 var speed = 200
 
@@ -169,3 +172,23 @@ func save_tools() -> void :
 	for new_tool in $Tools.get_children() :
 		Globals.tools.append(new_tool.duplicate())
 
+
+
+
+# Sanity gets drained when enemy gets close, and our speed gets slowed
+func drain_sanity() -> void :
+	if Globals.sanity > 0.0 :
+		Globals.sanity -= 0.15
+		
+		get_parent().sanity_check()
+	else :
+		print("You got lost !")
+		
+
+
+
+func restore_sanity() -> void :
+	if Globals.sanity < 100.0 :
+		Globals.sanity += 0.2
+		
+		get_parent().sanity_check()

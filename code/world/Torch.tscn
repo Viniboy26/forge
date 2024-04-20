@@ -1,9 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/sprites/circle_03.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/circle_05.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/world/Torch.png" type="Texture" id=3]
 [ext_resource path="res://assets/sfx/fire.wav" type="AudioStream" id=4]
+[ext_resource path="res://code/world/Torch.gd" type="Script" id=5]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 160.0
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.995283, 0.118182 ), 0.0, 0.0, 0, 0 ]
@@ -14,6 +18,7 @@ colors = PoolColorArray( 0.831373, 0.215686, 0.215686, 1, 0.831373, 0.215686, 0.
 
 [node name="Torch" type="Node2D"]
 position = Vector2( 20, 14 )
+script = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 2 )
@@ -33,6 +38,13 @@ texture = ExtResource( 2 )
 texture_scale = 1.8
 color = Color( 1, 0.705882, 0.45098, 1 )
 shadow_enabled = true
+
+[node name="DetectionArea" type="Area2D" parent="Light2D2"]
+collision_layer = 0
+collision_mask = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Light2D2/DetectionArea"]
+shape = SubResource( 3 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2( 6, -7 )
@@ -54,4 +66,7 @@ color_ramp = SubResource( 2 )
 position = Vector2( 6, -7 )
 stream = ExtResource( 4 )
 autoplay = true
-max_distance = 800.0
+max_distance = 1000.0
+
+[connection signal="body_entered" from="Light2D2/DetectionArea" to="." method="_on_DetectionArea_body_entered"]
+[connection signal="body_exited" from="Light2D2/DetectionArea" to="." method="_on_DetectionArea_body_exited"]
