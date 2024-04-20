@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://code/character/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/CharacterUIFont.tres" type="Theme" id=2]
@@ -14,6 +14,10 @@
 [ext_resource path="res://assets/sfx/forging/false_hit.wav" type="AudioStream" id=12]
 [ext_resource path="res://assets/sprites/enemy/template.png" type="Texture" id=13]
 [ext_resource path="res://code/character/UI.gd" type="Script" id=14]
+[ext_resource path="res://code/character/OvenUI.gd" type="Script" id=15]
+[ext_resource path="res://assets/sprites/player/ProgressBorder.png" type="Texture" id=16]
+[ext_resource path="res://assets/sprites/player/ProgressUnder.png" type="Texture" id=17]
+[ext_resource path="res://assets/sprites/player/Progress.png" type="Texture" id=18]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -241,6 +245,7 @@ smoothing_enabled = true
 smoothing_speed = 6.0
 
 [node name="UI" type="CanvasLayer" parent="."]
+pause_mode = 2
 script = ExtResource( 14 )
 
 [node name="Control" type="Control" parent="UI"]
@@ -820,6 +825,266 @@ margin_bottom = 31.0
 focus_neighbour_left = NodePath("../Retry")
 text = "Menu"
 
+[node name="PauseUI" type="PanelContainer" parent="UI/Control"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -140.0
+margin_top = -160.5
+margin_right = 140.0
+margin_bottom = 160.5
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/PauseUI"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 278.0
+margin_bottom = 319.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="message" type="Label" parent="UI/Control/PauseUI/VBoxContainer"]
+margin_top = 99.0
+margin_right = 276.0
+margin_bottom = 136.0
+theme = ExtResource( 2 )
+text = "Paused"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Control/PauseUI/VBoxContainer"]
+margin_top = 186.0
+margin_right = 276.0
+margin_bottom = 217.0
+theme = ExtResource( 9 )
+alignment = 1
+
+[node name="Back" type="Button" parent="UI/Control/PauseUI/VBoxContainer/HBoxContainer"]
+margin_left = 67.0
+margin_right = 141.0
+margin_bottom = 31.0
+focus_neighbour_right = NodePath("../Home")
+text = "Back"
+
+[node name="Home" type="Button" parent="UI/Control/PauseUI/VBoxContainer/HBoxContainer"]
+margin_left = 145.0
+margin_right = 208.0
+margin_bottom = 31.0
+focus_neighbour_left = NodePath("../Back")
+text = "Menu"
+
+[node name="OvenUI" type="PanelContainer" parent="UI/Control"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -140.0
+margin_top = -160.5
+margin_right = 140.0
+margin_bottom = 160.5
+custom_styles/panel = SubResource( 2 )
+script = ExtResource( 15 )
+
+[node name="Panel" type="Panel" parent="UI/Control/OvenUI"]
+visible = false
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 223.0
+margin_bottom = 75.0
+
+[node name="VBoxContainer" type="HBoxContainer" parent="UI/Control/OvenUI"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 278.0
+margin_bottom = 319.0
+custom_constants/separation = 30
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Control/OvenUI/VBoxContainer"]
+margin_left = 9.0
+margin_right = 52.0
+margin_bottom = 317.0
+
+[node name="TextureProgress" type="TextureProgress" parent="UI/Control/OvenUI/VBoxContainer/CenterContainer"]
+margin_top = 51.0
+margin_right = 43.0
+margin_bottom = 265.0
+size_flags_horizontal = 3
+step = 0.5
+value = 70.0
+texture_under = ExtResource( 17 )
+texture_over = ExtResource( 16 )
+texture_progress = ExtResource( 18 )
+texture_progress_offset = Vector2( 1, 5 )
+fill_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/OvenUI/VBoxContainer/CenterContainer/TextureProgress"]
+margin_left = 41.0
+margin_top = 64.0
+margin_right = 45.0
+margin_bottom = 104.0
+rect_rotation = 90.0
+color = Color( 0.61625, 0.85, 0.3825, 1 )
+
+[node name="Label" type="Label" parent="UI/Control/OvenUI/VBoxContainer"]
+margin_left = 82.0
+margin_top = 146.0
+margin_right = 82.0
+margin_bottom = 171.0
+theme = ExtResource( 9 )
+align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/OvenUI/VBoxContainer"]
+margin_left = 112.0
+margin_right = 266.0
+margin_bottom = 317.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Resources" type="HBoxContainer" parent="UI/Control/OvenUI/VBoxContainer/VBoxContainer"]
+margin_top = 143.0
+margin_right = 154.0
+margin_bottom = 173.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Copper" type="VBoxContainer" parent="UI/Control/OvenUI/VBoxContainer/VBoxContainer/Resources"]
+margin_right = 30.0
+margin_bottom = 30.0
+alignment = 1
+
+[node name="CopperOre" type="Button" parent="UI/Control/OvenUI/VBoxContainer/VBoxContainer/Resources/Copper"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+focus_neighbour_right = NodePath("../../Tin/TinOre")
+mouse_default_cursor_shape = 2
+disabled = true
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/OvenUI/VBoxContainer/VBoxContainer/Resources/Copper/CopperOre"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 25.0
+margin_bottom = 25.0
+mouse_filter = 1
+color = Color( 1, 0.6, 0.368627, 1 )
+
+[node name="Label" type="Label" parent="UI/Control/OvenUI/VBoxContainer/VBoxContainer/Resources/Copper"]
+visible = false
+margin_top = 34.0
+margin_right = 30.0
+margin_bottom = 71.0
+theme = ExtResource( 2 )
+text = "0"
+align = 1
+
+[node name="Label2" type="Label" parent="UI/Control/OvenUI/VBoxContainer/VBoxContainer/Resources"]
+margin_left = 40.0
+margin_top = 2.0
+margin_right = 52.0
+margin_bottom = 27.0
+theme = ExtResource( 9 )
+text = "+"
+
+[node name="Tin" type="VBoxContainer" parent="UI/Control/OvenUI/VBoxContainer/VBoxContainer/Resources"]
+margin_left = 62.0
+margin_right = 92.0
+margin_bottom = 30.0
+alignment = 1
+
+[node name="TinOre" type="Button" parent="UI/Control/OvenUI/VBoxContainer/VBoxContainer/Resources/Tin"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+focus_neighbour_left = NodePath("../../Copper/CopperOre")
+focus_neighbour_right = NodePath("../../Bronze/BronzeOre")
+mouse_default_cursor_shape = 2
+disabled = true
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/OvenUI/VBoxContainer/VBoxContainer/Resources/Tin/TinOre"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 25.0
+margin_bottom = 25.0
+mouse_filter = 1
+color = Color( 0.701961, 0.701961, 0.701961, 1 )
+
+[node name="Label" type="Label" parent="UI/Control/OvenUI/VBoxContainer/VBoxContainer/Resources/Tin"]
+visible = false
+margin_top = 34.0
+margin_right = 30.0
+margin_bottom = 71.0
+theme = ExtResource( 2 )
+text = "0"
+align = 1
+
+[node name="Label" type="Label" parent="UI/Control/OvenUI/VBoxContainer/VBoxContainer/Resources"]
+margin_left = 102.0
+margin_top = 2.0
+margin_right = 114.0
+margin_bottom = 27.0
+theme = ExtResource( 9 )
+text = "="
+
+[node name="Bronze" type="VBoxContainer" parent="UI/Control/OvenUI/VBoxContainer/VBoxContainer/Resources"]
+margin_left = 124.0
+margin_right = 154.0
+margin_bottom = 30.0
+alignment = 1
+
+[node name="BronzeOre" type="Button" parent="UI/Control/OvenUI/VBoxContainer/VBoxContainer/Resources/Bronze"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+focus_neighbour_left = NodePath("../../Tin/TinOre")
+mouse_default_cursor_shape = 2
+disabled = true
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/OvenUI/VBoxContainer/VBoxContainer/Resources/Bronze/BronzeOre"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 25.0
+margin_bottom = 25.0
+mouse_filter = 1
+color = Color( 1, 0.760784, 0.4, 1 )
+
+[node name="Label" type="Label" parent="UI/Control/OvenUI/VBoxContainer/VBoxContainer/Resources/Bronze"]
+visible = false
+margin_top = 34.0
+margin_right = 30.0
+margin_bottom = 71.0
+theme = ExtResource( 2 )
+text = "0"
+align = 1
+
+[node name="Close" type="Button" parent="UI/Control/OvenUI/VBoxContainer"]
+visible = false
+margin_top = 275.0
+margin_right = 276.0
+margin_bottom = 306.0
+grow_horizontal = 2
+focus_neighbour_right = NodePath("../VBoxContainer/Resources/Copper/CopperOre")
+theme = ExtResource( 9 )
+text = "Close"
+icon_align = 1
+expand_icon = true
+
+[node name="CorrectHit" type="AudioStreamPlayer" parent="UI/Control/OvenUI"]
+stream = ExtResource( 12 )
+
+[node name="FalseHit" type="AudioStreamPlayer" parent="UI/Control/OvenUI"]
+stream = ExtResource( 11 )
+
+[node name="Forged" type="AudioStreamPlayer" parent="UI/Control/OvenUI"]
+stream = ExtResource( 10 )
+volume_db = 4.0
+
 [node name="Pickup" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 volume_db = 15.0
@@ -840,4 +1105,11 @@ anims/Transform = SubResource( 4 )
 [connection signal="pressed" from="UI/Control/ForgeUI/VBoxContainer/Close" to="UI/Control/ForgeUI" method="_on_Close_pressed"]
 [connection signal="pressed" from="UI/Control/LoseUI/VBoxContainer/HBoxContainer/Retry" to="." method="_on_Retry_pressed"]
 [connection signal="pressed" from="UI/Control/LoseUI/VBoxContainer/HBoxContainer/Home" to="." method="_on_Home_pressed"]
+[connection signal="pressed" from="UI/Control/PauseUI/VBoxContainer/HBoxContainer/Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="UI/Control/PauseUI/VBoxContainer/HBoxContainer/Home" to="." method="_on_Home_pressed"]
+[connection signal="visibility_changed" from="UI/Control/OvenUI" to="UI/Control/OvenUI" method="_on_OvenUI_visibility_changed"]
+[connection signal="pressed" from="UI/Control/OvenUI/VBoxContainer/VBoxContainer/Resources/Copper/CopperOre" to="UI/Control/OvenUI" method="_on_CopperOre_pressed"]
+[connection signal="pressed" from="UI/Control/OvenUI/VBoxContainer/VBoxContainer/Resources/Tin/TinOre" to="UI/Control/OvenUI" method="_on_TinOre_pressed"]
+[connection signal="pressed" from="UI/Control/OvenUI/VBoxContainer/VBoxContainer/Resources/Bronze/BronzeOre" to="UI/Control/OvenUI" method="_on_BronzeOre_pressed"]
+[connection signal="pressed" from="UI/Control/OvenUI/VBoxContainer/Close" to="UI/Control/OvenUI" method="_on_Close_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

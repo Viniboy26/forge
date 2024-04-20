@@ -3,7 +3,7 @@ extends StaticBody2D
 
 onready var enemy = preload("res://code/enemy/Enemy.tscn")
 
-onready var new_pickup = null
+onready var pickup = preload("res://code/Material/Pickup.tscn")
 
 export var durability : int = 10000
 
@@ -46,7 +46,7 @@ func take_damage(damage : int) -> bool :
 # Destroy this Spawner and drop the pickup
 func _destroy() -> void :
 	# Spawn a magic ore
-	var new_pickup = new_pickup.instance()
+	var new_pickup = pickup.instance()
 	
 	# Set it's variables
 	new_pickup.position = position

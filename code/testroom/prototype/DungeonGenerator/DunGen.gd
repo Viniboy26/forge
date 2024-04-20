@@ -35,6 +35,7 @@ var paths = []
 
 var player_room_id = 0
 var anvil_room_id = 0
+var oven_room_id = 0
 
 onready var tilemap = $Tilemap
 
@@ -294,4 +295,17 @@ func get_anvil_position() -> Vector2 :
 		
 	
 	return final_rooms[anvil_room_id].center
+
+
+func get_oven_position() -> Vector2 :
+	oven_room_id = randi() % (final_rooms.size())
 	
+	# Don't make it the same room as the player or anvil
+	while(oven_room_id == player_room_id or oven_room_id == anvil_room_id):
+		oven_room_id = randi() % (final_rooms.size())
+		
+	
+	return final_rooms[oven_room_id].center
+	
+
+

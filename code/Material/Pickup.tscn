@@ -42,6 +42,15 @@ margin_bottom = 11.0
 rect_rotation = -40.0
 color = Color( 0.701961, 0.701961, 0.701961, 1 )
 
+[node name="Bronze" type="ColorRect" parent="Material"]
+visible = false
+margin_left = -10.0
+margin_top = -5.0
+margin_right = -2.0
+margin_bottom = 11.0
+rect_rotation = -40.0
+color = Color( 1, 0.760784, 0.4, 1 )
+
 [node name="Magic" type="ColorRect" parent="Material"]
 visible = false
 margin_left = -10.0

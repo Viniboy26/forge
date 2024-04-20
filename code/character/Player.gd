@@ -226,6 +226,8 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 
+
+
 # Retry or go to menu
 func _on_Retry_pressed():
 	Globals.reset_variables()
@@ -235,3 +237,10 @@ func _on_Retry_pressed():
 func _on_Home_pressed():
 	Globals.reset_variables()
 	SceneHandler.go_to(SceneHandler.menu)
+	get_tree().paused = false
+
+
+func _on_Back_pressed():
+	# Unpause game and hide PauseUI
+	$UI/Control/PauseUI.hide()
+	get_tree().paused = false

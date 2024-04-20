@@ -29,6 +29,9 @@ onready var enemy_spawner_scene = preload("res://code/enemy/EnemySpawner.tscn")
 onready var anvil_scene = preload("res://code/world/Door/Anvil.tscn")
 
 
+onready var oven_scene = preload("res://code/world/Door/Oven.tscn")
+
+
 
 func _ready():
 	# Generate the dungeon
@@ -45,6 +48,12 @@ func _ready():
 	var new_anvil = anvil_scene.instance()
 	new_anvil.global_position = $DunGen.get_anvil_position() * Globals.cell_size
 	$Interactables.add_child(new_anvil)
+	
+	
+	# Spawn oven in dungeon
+	var new_oven = oven_scene.instance()
+	new_oven.global_position = $DunGen.get_anvil_position() * Globals.cell_size
+	$Interactables.add_child(new_oven)
 	
 	
 	# Spawn the ores
