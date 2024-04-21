@@ -11,7 +11,7 @@ func _ready():
 	impacts_left = NUMBER_OF_IMPACTS
 	$Timer.start()
 	do_noise()
-	
+
 func do_noise():
 	$AudioStreamPlayer2D.play()
 	$CPUParticles2D.emitting = true
