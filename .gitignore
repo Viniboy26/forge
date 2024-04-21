@@ -1,0 +1,7 @@
+# From https://docs.godotengine.org/fr/3.5/tutorials/best_practices/version_control_systems.html#files-to-exclude-from-vcs
+
+.import/
+*.translation
+export_preset.cfg
+.mono/
+
