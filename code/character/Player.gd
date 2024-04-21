@@ -18,6 +18,8 @@ var ores = [0, 0, 0, 0, 0]
 
 var last_dir : Vector2 = Vector2.UP
 
+var lost = false
+
 
 
 func _ready():
@@ -50,12 +52,23 @@ func _physics_process(delta):
 	var direction = _move_input()
 	if direction != Vector2.ZERO:
 		last_dir = direction
+		
+		#Walk sound
+		if $AnimationPlayer.assigned_animation != "Transform" :
+			$AnimationPlayer.play("walk")
+		
+		rotate_character(direction)
+	else:
+		if $AnimationPlayer.assigned_animation == "walk":
+		# Stop walk sound
+			$AnimationPlayer.stop()
+			$AudioStreamPlayer.stop()
+#			move_and_slide(Vector2.ZERO)
 			
 	# Move the character
 	move_and_slide(direction)
 		
 		# Rotate the character
-	rotate_character(last_dir)
 
 
 func _input(event):
@@ -80,8 +93,15 @@ func _move_input() -> Vector2 :
 		var joy_x = Input.get_joy_axis(0, JOY_AXIS_0)  # Left joystick X axis
 		var joy_y = Input.get_joy_axis(0, JOY_AXIS_1)  # Left joystick Y axis
 	
-		motion.x = joy_x
-		motion.y = joy_y
+#		print(motion)
+		if joy_x != 0 :
+			motion.x = joy_x
+		else :
+			motion.x = 0
+		if joy_y != 0 :
+			motion.y = joy_y
+		else :
+			motion.y = 0
 	else:
 		# Else we take keyboard commands
 		if Input.is_action_pressed("left"):
@@ -156,7 +176,7 @@ func give_tool(new_tool_scene, stats) -> void :
 	new_tool.durability = stats.x
 	new_tool.damage = stats.y
 	
-	print("New stats : ", stats)
+#	print("New stats : ", stats)
 	
 	# Swap with current primary if full
 	new_tool.hide()
@@ -180,12 +200,14 @@ func save_tools() -> void :
 # Sanity gets drained when enemy gets close, and our speed gets slowed
 func drain_sanity() -> void :
 	if Globals.sanity > 0.0 :
-		Globals.sanity -= 0.3
+		Globals.sanity -= 0.5
+		
+#		$CPUParticles2D.emitting = true
 		
 		get_parent().sanity_check()
 	else :
 		# Swap to ghost body
-		if !$AnimationPlayer.is_playing() and !$LoseBody.visible:
+		if !lost and $AnimationPlayer.assigned_animation != "Transform":
 			$AnimationPlayer.play("Transform")
 #			print("You got lost !")
 		
@@ -194,7 +216,10 @@ func drain_sanity() -> void :
 
 func restore_sanity() -> void :
 	if Globals.sanity < 100.0 :
-		Globals.sanity += 0.2
+		Globals.sanity += 0.25
+		
+		
+#		$CPUParticles2D.emitting = false
 		
 		get_parent().sanity_check()
 		
@@ -220,7 +245,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Transform" :
 		# Pause the game and show lose UI
 #		get_tree().paused = true
-		
+		lost = true
 		$UI/Control/LoseUI.show()
 		$UI/Control/LoseUI/VBoxContainer/HBoxContainer/Retry.grab_focus()
 

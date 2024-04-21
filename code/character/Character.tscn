@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://code/character/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/CharacterUIFont.tres" type="Theme" id=2]
@@ -19,6 +19,11 @@
 [ext_resource path="res://assets/sprites/player/ProgressUnder.png" type="Texture" id=17]
 [ext_resource path="res://assets/sprites/player/Progress.png" type="Texture" id=18]
 [ext_resource path="res://assets/sfx/lose_laugh.wav" type="AudioStream" id=19]
+[ext_resource path="res://assets/sprites/player/Character.png" type="Texture" id=20]
+[ext_resource path="res://assets/sfx/walk_on_stone.wav" type="AudioStream" id=21]
+
+[sub_resource type="OccluderPolygon2D" id=6]
+polygon = PoolVector2Array( -19, -17.7778, -5.66667, 2.22222, 5.44444, 2.22222, 18.7778, -16.6667, 5.44444, 4.44444, -6.77778, 4.44444 )
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -56,7 +61,7 @@ tracks/1/path = NodePath("ColorRect:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -123,6 +128,78 @@ tracks/6/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sprite/Light2D2:energy")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.8 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("UI/Control/WinUI:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("UI/Control/WinUI:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("AudioStreamPlayer:playing")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "Transform"
@@ -143,12 +220,12 @@ tracks/1/path = NodePath("ColorRect:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true, false ]
+"values": [ false, false ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("LoseBody:visible")
@@ -210,6 +287,89 @@ tracks/6/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sprite/Light2D2:energy")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.8, 0.0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Win"
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/Control/WinUI:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("UI/Control/WinUI:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "walk"
+length = 3.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AudioStreamPlayer:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Curve" id=9]
+_data = [ Vector2( 0.454545, 0.0100852 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.936364 ), 0.0, 0.0, 0, 0 ]
 
 [node name="KinematicBody2D" type="KinematicBody2D" groups=["Player"]]
 collision_layer = 2
@@ -221,7 +381,28 @@ script = ExtResource( 1 )
 [node name="Secondary" type="Node2D" parent="."]
 position = Vector2( 0, 12 )
 
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -1, 0 )
+scale = Vector2( 0.9, 0.9 )
+texture = ExtResource( 20 )
+
+[node name="Light2D2" type="Light2D" parent="Sprite"]
+position = Vector2( 1.22222, -18.8889 )
+texture = ExtResource( 3 )
+texture_scale = 0.25
+color = Color( 1, 0.992157, 0.45098, 1 )
+energy = 0.8
+shadow_enabled = true
+shadow_item_cull_mask = 3
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite/Light2D2"]
+light_mask = 2
+position = Vector2( 0, 2.22222 )
+occluder = SubResource( 6 )
+light_mask = 2
+
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 anchor_right = 0.652
 margin_left = -19.0
 margin_top = -10.0
@@ -804,9 +985,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -140.0
+margin_left = -161.5
 margin_top = -160.5
-margin_right = 140.0
+margin_right = 161.5
 margin_bottom = 160.5
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
@@ -844,6 +1025,60 @@ focus_neighbour_right = NodePath("../Home")
 text = "Retry"
 
 [node name="Home" type="Button" parent="UI/Control/LoseUI/VBoxContainer/HBoxContainer"]
+margin_left = 167.0
+margin_right = 230.0
+margin_bottom = 31.0
+focus_neighbour_left = NodePath("../Retry")
+text = "Menu"
+
+[node name="WinUI" type="PanelContainer" parent="UI/Control"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -161.5
+margin_top = -160.5
+margin_right = 161.5
+margin_bottom = 160.5
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/WinUI"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 321.0
+margin_bottom = 319.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="message" type="Label" parent="UI/Control/WinUI/VBoxContainer"]
+margin_top = 79.0
+margin_right = 319.0
+margin_bottom = 156.0
+theme = ExtResource( 2 )
+text = "You found
+your way out !"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Control/WinUI/VBoxContainer"]
+margin_top = 206.0
+margin_right = 319.0
+margin_bottom = 237.0
+theme = ExtResource( 9 )
+alignment = 1
+
+[node name="Retry" type="Button" parent="UI/Control/WinUI/VBoxContainer/HBoxContainer"]
+margin_left = 89.0
+margin_right = 163.0
+margin_bottom = 31.0
+focus_neighbour_right = NodePath("../Home")
+text = "Retry"
+
+[node name="Home" type="Button" parent="UI/Control/WinUI/VBoxContainer/HBoxContainer"]
 margin_left = 167.0
 margin_right = 230.0
 margin_bottom = 31.0
@@ -890,15 +1125,15 @@ theme = ExtResource( 9 )
 alignment = 1
 
 [node name="Back" type="Button" parent="UI/Control/PauseUI/VBoxContainer/HBoxContainer"]
-margin_left = 67.0
-margin_right = 141.0
+margin_left = 73.0
+margin_right = 135.0
 margin_bottom = 31.0
 focus_neighbour_right = NodePath("../Home")
 text = "Back"
 
 [node name="Home" type="Button" parent="UI/Control/PauseUI/VBoxContainer/HBoxContainer"]
-margin_left = 145.0
-margin_right = 208.0
+margin_left = 139.0
+margin_right = 202.0
 margin_bottom = 31.0
 focus_neighbour_left = NodePath("../Back")
 text = "Menu"
@@ -1117,12 +1352,37 @@ volume_db = 15.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 5 )
 anims/Transform = SubResource( 4 )
+anims/Win = SubResource( 7 )
+anims/walk = SubResource( 8 )
 
 [node name="LoseLaugh" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 19 )
 volume_db = -3.0
 
 [node name="Gadget" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 21 )
+volume_db = -6.0
+bus = "SFX"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+visible = false
+emitting = false
+amount = 80
+lifetime = 0.4
+explosiveness = 0.1
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 15.0
+gravity = Vector2( 0, 0 )
+linear_accel = 200.0
+linear_accel_random = 0.3
+radial_accel = 5.0
+radial_accel_random = 0.2
+scale_amount = 3.0
+scale_amount_curve = SubResource( 9 )
+color = Color( 1, 0.956667, 0.48, 1 )
 
 [connection signal="visibility_changed" from="UI/Control/ForgeUI" to="UI/Control/ForgeUI" method="_on_ForgeUI_visibility_changed"]
 [connection signal="pressed" from="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/ForgeChoice/Hammer" to="UI/Control/ForgeUI" method="_on_Hammer_pressed"]
@@ -1136,6 +1396,9 @@ volume_db = -3.0
 [connection signal="pressed" from="UI/Control/ForgeUI/VBoxContainer/Close" to="UI/Control/ForgeUI" method="_on_Close_pressed"]
 [connection signal="pressed" from="UI/Control/LoseUI/VBoxContainer/HBoxContainer/Retry" to="." method="_on_Retry_pressed"]
 [connection signal="pressed" from="UI/Control/LoseUI/VBoxContainer/HBoxContainer/Home" to="." method="_on_Home_pressed"]
+[connection signal="visibility_changed" from="UI/Control/WinUI" to="UI" method="_on_WinUI_visibility_changed"]
+[connection signal="pressed" from="UI/Control/WinUI/VBoxContainer/HBoxContainer/Retry" to="." method="_on_Retry_pressed"]
+[connection signal="pressed" from="UI/Control/WinUI/VBoxContainer/HBoxContainer/Home" to="." method="_on_Home_pressed"]
 [connection signal="pressed" from="UI/Control/PauseUI/VBoxContainer/HBoxContainer/Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="UI/Control/PauseUI/VBoxContainer/HBoxContainer/Home" to="." method="_on_Home_pressed"]
 [connection signal="visibility_changed" from="UI/Control/OvenUI" to="UI/Control/OvenUI" method="_on_OvenUI_visibility_changed"]

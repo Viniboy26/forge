@@ -22,6 +22,8 @@ func _input(event):
 func _on_HammerPickup_body_entered(body):
 	if body.is_in_group("Player"):
 		player = body
+#		player.give_tool(tool_pickup, stats)
+#		queue_free()
 		
 		
 #		body.give_tool(tool_pickup)

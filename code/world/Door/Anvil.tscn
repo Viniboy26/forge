@@ -1,15 +1,32 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Anvil.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/circle_05.png" type="Texture" id=2]
 [ext_resource path="res://assets/sfx/forging/forged.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sprites/world/anvil.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 35.0
 
 [node name="Anvil" type="Node2D"]
 
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 25, 15 )
+scale = Vector2( 0.12, 0.12 )
+texture = ExtResource( 4 )
+
+[node name="InteractZone" type="Area2D" parent="."]
+position = Vector2( 18, 13 )
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone"]
+position = Vector2( 6, 0 )
+shape = SubResource( 3 )
+
 [node name="Anvil" type="ColorRect" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 25.0
 color = Color( 0, 0, 0, 1 )
@@ -32,16 +49,6 @@ margin_right = 33.0
 margin_bottom = 28.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="InteractZone" type="Area2D" parent="Anvil"]
-position = Vector2( 20, 13 )
-collision_layer = 4
-collision_mask = 2
-script = ExtResource( 1 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Anvil/InteractZone"]
-position = Vector2( 6, 0 )
-shape = SubResource( 3 )
-
 [node name="Light2D2" type="Light2D" parent="."]
 position = Vector2( 26, 13 )
 texture = ExtResource( 2 )
@@ -56,8 +63,9 @@ autostart = true
 [node name="Ping" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 max_distance = 10000.0
+attenuation = 2.0
 bus = "SFX"
 
-[connection signal="body_entered" from="Anvil/InteractZone" to="Anvil/InteractZone" method="_on_InteractZone_body_entered"]
-[connection signal="body_exited" from="Anvil/InteractZone" to="Anvil/InteractZone" method="_on_InteractZone_body_exited"]
-[connection signal="timeout" from="Timer" to="Anvil/InteractZone" method="_on_Timer_timeout"]
+[connection signal="body_entered" from="InteractZone" to="InteractZone" method="_on_InteractZone_body_entered"]
+[connection signal="body_exited" from="InteractZone" to="InteractZone" method="_on_InteractZone_body_exited"]
+[connection signal="timeout" from="Timer" to="InteractZone" method="_on_Timer_timeout"]

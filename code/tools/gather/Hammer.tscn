@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://code/tools/gather/Hammer.gd" type="Script" id=1]
 [ext_resource path="res://assets/sfx/hammer/hit_rock0.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/sfx/ores/destroy.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/sfx/hammer/swing.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sprites/player/Hammer.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -119,19 +120,27 @@ script = ExtResource( 1 )
 player_offset = Vector2( 24, -30 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 margin_left = -3.0
 margin_right = 3.0
 margin_bottom = 40.0
 color = Color( 0.631373, 0.329412, 0.00784314, 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
 margin_left = -13.6667
 margin_top = -7.66667
 margin_right = 14.3333
 margin_bottom = 0.333331
 color = Color( 0.51, 0.51, 0.51, 1 )
 
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -41.6667, 65 )
+scale = Vector2( 2, 2.5 )
+texture = ExtResource( 5 )
+
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 1.66666, 16.6667 )
 collision_layer = 8
 collision_mask = 4
 
@@ -146,6 +155,7 @@ anims/RESET = SubResource( 2 )
 anims/swing = SubResource( 3 )
 
 [node name="SoundArea" type="Area2D" parent="."]
+position = Vector2( 1.66666, 16.6667 )
 scale = Vector2( 0.8, 0.8 )
 collision_layer = 0
 collision_mask = 16
@@ -154,13 +164,16 @@ collision_mask = 16
 shape = SubResource( 4 )
 
 [node name="HitRock" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 1.66666, 16.6667 )
 stream = ExtResource( 2 )
 max_distance = 400.0
 
 [node name="Swing" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 1.66666, 16.6667 )
 stream = ExtResource( 4 )
 
 [node name="Destroy" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 1.66666, 16.6667 )
 stream = ExtResource( 3 )
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

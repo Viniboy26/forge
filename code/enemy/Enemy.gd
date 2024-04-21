@@ -134,7 +134,7 @@ func check_out(sound_pos : Vector2) -> void :
 	investigating = true
 	$LocationTimer.stop()
 	
-	location = sound_pos
+	location = sound_pos + Vector2(rand_range(-100, 100), rand_range(-100, 100))
 	
 #	print("Investigating : ", sound_pos)
 

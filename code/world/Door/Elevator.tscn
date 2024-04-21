@@ -1,0 +1,276 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/Exit.gd" type="Script" id=2]
+[ext_resource path="res://assets/sprites/world/ExitPortal.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/circle_05.png" type="Texture" id=4]
+[ext_resource path="res://code/world/Door/Win.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=3]
+size = 35
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 35.0
+
+[sub_resource type="Animation" id=6]
+resource_name = "Construct"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Broken:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Broken:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Label:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.45, 0.4, 1, 1 ), Color( 0.45, 0.4, 1, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("InteractZone:monitoring")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("InteractZone2:monitoring")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Broken:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Broken:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Label:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.45, 0.4, 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("InteractZone:monitoring")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("InteractZone2:monitoring")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[node name="Elevator" type="Node2D"]
+
+[node name="Broken" type="Node2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="Broken"]
+color = Color( 0.341176, 0.247059, 0.188235, 1 )
+polygon = PoolVector2Array( -12, 37, -33, 20, 1, 27, -7, 30, 0, 36 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="Broken"]
+color = Color( 0.341176, 0.247059, 0.188235, 1 )
+polygon = PoolVector2Array( 4, 29, 28, 32, 23, 36, 9, 39, 1, 33 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="Broken"]
+color = Color( 0.341176, 0.247059, 0.188235, 1 )
+polygon = PoolVector2Array( -13, 12, -6, 21, 13, 25, 14, 18, 23, 14 )
+
+[node name="Polygon2D4" type="Polygon2D" parent="Broken"]
+color = Color( 0.341176, 0.247059, 0.188235, 1 )
+polygon = PoolVector2Array( 29, 15, 19, 20, 19, 24, 31, 27, 41, 18 )
+
+[node name="Polygon2D5" type="Polygon2D" parent="Broken"]
+color = Color( 1, 0.760784, 0.4, 1 )
+polygon = PoolVector2Array( -24, -11, -44, 19, -41, 21, -28, 1, -31, 3 )
+
+[node name="Polygon2D6" type="Polygon2D" parent="Broken"]
+color = Color( 1, 0.760784, 0.4, 1 )
+polygon = PoolVector2Array( -21, -1, -16, 0, -1, 1, -1, -2, -10, -3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( -2, 6 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 3 )
+
+[node name="Light2D2" type="Light2D" parent="Sprite"]
+position = Vector2( 20, -60 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 4 )
+texture_scale = 0.6
+color = Color( 0.45, 0.981667, 1, 1 )
+energy = 0.8
+shadow_enabled = true
+
+[node name="Label" type="Label" parent="."]
+modulate = Color( 0.45, 0.4, 1, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -38.0
+margin_top = -47.0
+margin_right = 44.0
+margin_bottom = -4.0
+theme = SubResource( 4 )
+text = "0/10"
+align = 1
+
+[node name="InteractZone" type="Area2D" parent="."]
+position = Vector2( -6, 14 )
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone"]
+position = Vector2( 6, 0 )
+shape = SubResource( 5 )
+
+[node name="InteractZone2" type="Area2D" parent="."]
+position = Vector2( -6, 14 )
+collision_layer = 4
+collision_mask = 2
+monitoring = false
+script = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone2"]
+position = Vector2( 6, 0 )
+shape = SubResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Construct = SubResource( 6 )
+anims/RESET = SubResource( 7 )
+
+[connection signal="body_entered" from="InteractZone" to="InteractZone" method="_on_InteractZone_body_entered"]
+[connection signal="body_exited" from="InteractZone" to="InteractZone" method="_on_InteractZone_body_exited"]
+[connection signal="body_entered" from="InteractZone2" to="InteractZone2" method="_on_InteractZone_body_entered"]
+[connection signal="body_exited" from="InteractZone2" to="InteractZone2" method="_on_InteractZone_body_exited"]

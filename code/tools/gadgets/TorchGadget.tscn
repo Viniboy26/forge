@@ -66,6 +66,7 @@ color_ramp = SubResource( 2 )
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 6, -7 )
 stream = ExtResource( 2 )
+volume_db = 2.0
 max_distance = 1000.0
 
 [connection signal="body_entered" from="RepellerLight/DetectionArea" to="." method="_on_DetectionArea_body_entered"]

@@ -76,11 +76,12 @@ func _ready():
 
 
 func _input(event):
-	if Input.is_action_just_pressed("switch_camera"):
-		if $Character.get_node("Camera2D").current:
-			$DunGen.get_node("Camera2D").make_current()
-		else:
-			$Character/Camera2D.make_current()
+	pass
+#	if Input.is_action_just_pressed("switch_camera"):
+#		if $Character.get_node("Camera2D").current:
+#			$DunGen.get_node("Camera2D").make_current()
+#		else:
+#			$Character/Camera2D.make_current()
 
 
 
@@ -150,7 +151,7 @@ func _spawn_enemy_spawners(rooms) -> void :
 	for room in rooms :
 		
 		# Only spawn if it's not the player's, anvil's or oven's room
-		if (id != $DunGen.player_room_id or id != $DunGen.anvil_room_id or id != $DunGen.oven_room_id) :
+		if (id != $DunGen.player_room_id and id != $DunGen.anvil_room_id and id != $DunGen.oven_room_id) :
 			
 			if randf() < spawner_spawn_rate :
 				# Place a spawner in the middle of the room
@@ -169,6 +170,6 @@ func _spawn_enemy_spawners(rooms) -> void :
 
 
 func sanity_check() -> void :
-	var darkness = range_lerp(float(Globals.sanity), 0.0, 100.0, 0.0, 0.15)
+	var darkness = range_lerp(float(Globals.sanity), 0.0, 100.0, 0.0, 0.2)
 #	print("Darkness : ", darkness)
 	$CanvasModulate.color.v = darkness

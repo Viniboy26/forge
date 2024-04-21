@@ -33,7 +33,7 @@ func _on_InteractZone_body_exited(body):
 
 # Ping our location
 func _on_Timer_timeout():
-	get_parent().get_parent().get_node("Ping").play()
+	get_parent().get_node("Ping").play()
 	
 	# Restart timer
-	get_parent().get_parent().get_node("Timer").start()
+	get_parent().get_node("Timer").start()

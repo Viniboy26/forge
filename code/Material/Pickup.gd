@@ -12,7 +12,7 @@ func _ready():
 # Make the player pickup the material
 func _on_Pickup_body_entered(body):
 	if body.is_in_group("Player"):
-		print("Picked up : ", Globals.type_to_material(type))
+#		print("Picked up : ", Globals.type_to_material(type))
 		
 		body.pickup(type)
 		

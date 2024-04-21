@@ -47,7 +47,8 @@ func _ready():
 
 func _input(event):
 	if event.is_action_released("retry"):
-		generate_dungeon()
+#		generate_dungeon()
+		pass
 
 
 # Function that generates the basic layout for this run's dungeon (rooms and paths)

@@ -9,3 +9,8 @@ func _input(event):
 		
 		if $Control/PauseUI.visible :
 			$Control/PauseUI/VBoxContainer/HBoxContainer/Back.grab_focus()
+
+
+func _on_WinUI_visibility_changed():
+	if $Control/WinUI.visible :
+		$Control/WinUI/VBoxContainer/HBoxContainer/Retry.grab_focus()

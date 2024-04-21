@@ -14,17 +14,8 @@ func _input(event):
 		
 		
 		
-		# Give Magic ores to elevator
-		magic_ores += player.give_magic_to_exit()
-		
-		
-		# Update visual
-		get_parent().get_node("Label").text = String(magic_ores) + "/" + String(exit_limit)
-		
-		# Test if we won
-		if magic_ores >= exit_limit :
-			get_parent().get_node("AnimationPlayer").play("Construct")
-			print("You got out !")
+		# Win game
+		player.get_node("AnimationPlayer").play("Win")
 		
 
 

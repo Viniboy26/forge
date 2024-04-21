@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/sfx/forge_room_soundtrack.ogg" type="AudioStream" id=1]
 [ext_resource path="res://scenes/Menu.gd" type="Script" id=2]
 [ext_resource path="res://assets/fonts/CharacterUIFont.tres" type="Theme" id=3]
 [ext_resource path="res://code/world/Torch.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/fonts/ForgeUI.tres" type="Theme" id=5]
+[ext_resource path="res://assets/sprites/circle_05.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/enemy/template.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/player/Character.png" type="Texture" id=8]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.15, 0.15, 0.15, 0.901961 )
@@ -17,6 +21,91 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0.454545, 0.0100852 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.936364 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="OccluderPolygon2D" id=4]
+polygon = PoolVector2Array( -19, -17.7778, -5.66667, 2.22222, 5.44444, 2.22222, 18.7778, -16.6667, 5.44444, 4.44444, -6.77778, 4.44444 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "Intro"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer/LoseBody2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 712, 192 ), Vector2( 712, 232 ), Vector2( 712, 152 ), Vector2( 712, 192 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer/LoseBody:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 312, 192 ), Vector2( 312, 152 ), Vector2( 312, 232 ), Vector2( 312, 192 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer/Sprite/Light2D2:enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer/LoseBody2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 712, 192 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer/LoseBody:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 312, 192 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer/Sprite/Light2D2:enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -28,59 +117,95 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -140.0
-margin_top = -160.5
-margin_right = 140.0
-margin_bottom = 160.5
+margin_left = -150.0
+margin_top = -211.5
+margin_right = 150.0
+margin_bottom = 211.5
+rect_min_size = Vector2( 300, 400 )
+mouse_filter = 1
+size_flags_horizontal = 3
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Buttons" type="VBoxContainer" parent="PanelContainer"]
+[node name="CenterContainer3" type="CenterContainer" parent="PanelContainer"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 278.0
-margin_bottom = 319.0
-size_flags_horizontal = 15
-size_flags_vertical = 15
+margin_right = 298.0
+margin_bottom = 421.0
+mouse_filter = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer3"]
+margin_left = 54.0
+margin_top = 43.0
+margin_right = 242.0
+margin_bottom = 376.0
+size_flags_horizontal = 3
+custom_constants/separation = 60
+alignment = 1
+
+[node name="CenterContainer2" type="CenterContainer" parent="PanelContainer/CenterContainer3/VBoxContainer"]
+margin_right = 188.0
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="PanelContainer/CenterContainer3/VBoxContainer"]
+margin_top = 60.0
+margin_right = 188.0
+margin_bottom = 97.0
+theme = ExtResource( 3 )
+text = "Lost Forger"
+align = 1
+valign = 1
+
+[node name="Buttons" type="VBoxContainer" parent="PanelContainer/CenterContainer3/VBoxContainer"]
+margin_top = 157.0
+margin_right = 188.0
+margin_bottom = 273.0
 size_flags_stretch_ratio = 0.5
+theme = ExtResource( 5 )
 custom_constants/separation = 30
 alignment = 1
 
-[node name="Button4" type="Button" parent="PanelContainer/Buttons"]
-margin_top = 27.0
-margin_right = 276.0
-margin_bottom = 70.0
+[node name="Button4" type="Button" parent="PanelContainer/CenterContainer3/VBoxContainer/Buttons"]
+margin_right = 188.0
+margin_bottom = 43.0
 focus_neighbour_bottom = NodePath("../Button")
 theme = ExtResource( 3 )
 text = "Tutorial"
 
-[node name="Button" type="Button" parent="PanelContainer/Buttons"]
-margin_top = 100.0
-margin_right = 276.0
-margin_bottom = 143.0
+[node name="Button" type="Button" parent="PanelContainer/CenterContainer3/VBoxContainer/Buttons"]
+margin_top = 73.0
+margin_right = 188.0
+margin_bottom = 116.0
 focus_neighbour_top = NodePath("../Button4")
 focus_neighbour_bottom = NodePath("../Button2")
 theme = ExtResource( 3 )
-text = "Start"
+text = "Play"
 
-[node name="Button2" type="Button" parent="PanelContainer/Buttons"]
-margin_top = 173.0
-margin_right = 276.0
-margin_bottom = 216.0
+[node name="Button2" type="Button" parent="PanelContainer/CenterContainer3/VBoxContainer/Buttons"]
+visible = false
+margin_top = 146.0
+margin_right = 190.0
+margin_bottom = 189.0
 focus_neighbour_top = NodePath("../Button")
 focus_neighbour_bottom = NodePath("../Button3")
 theme = ExtResource( 3 )
 text = "Options"
 
-[node name="Button3" type="Button" parent="PanelContainer/Buttons"]
-margin_top = 246.0
-margin_right = 276.0
-margin_bottom = 289.0
+[node name="Button3" type="Button" parent="PanelContainer/CenterContainer3/VBoxContainer/Buttons"]
+visible = false
+margin_top = 146.0
+margin_right = 188.0
+margin_bottom = 189.0
 focus_neighbour_top = NodePath("../Button2")
 theme = ExtResource( 3 )
 text = "Exit"
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/CenterContainer3/VBoxContainer"]
+margin_top = 333.0
+margin_right = 188.0
+margin_bottom = 333.0
 
 [node name="CenterContainer2" type="CenterContainer" parent="PanelContainer"]
 visible = false
@@ -104,8 +229,107 @@ margin_bottom = 319.0
 
 [node name="Soundtrack" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
-volume_db = -6.0
+volume_db = -10.0
 autoplay = true
 
-[connection signal="pressed" from="PanelContainer/Buttons/Button4" to="." method="_on_Button4_pressed"]
-[connection signal="pressed" from="PanelContainer/Buttons/Button" to="." method="_on_Button_pressed"]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
+
+[node name="LoseBody2" type="Node2D" parent="HBoxContainer"]
+position = Vector2( 712, 192 )
+scale = Vector2( 1.6, 1.6 )
+
+[node name="Sprite" type="Sprite" parent="HBoxContainer/LoseBody2"]
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 7 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="HBoxContainer/LoseBody2"]
+amount = 10
+lifetime = 0.4
+explosiveness = 0.1
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 15.0
+gravity = Vector2( 0, 0 )
+linear_accel = 200.0
+linear_accel_random = 0.3
+radial_accel = 5.0
+radial_accel_random = 0.2
+scale_amount = 3.0
+scale_amount_curve = SubResource( 3 )
+color = Color( 1, 0.956667, 0.48, 1 )
+
+[node name="Light2D2" type="Light2D" parent="HBoxContainer/LoseBody2"]
+position = Vector2( -1, 0 )
+texture = ExtResource( 6 )
+texture_scale = 0.8
+color = Color( 1, 0.992157, 0.45098, 1 )
+energy = 0.8
+
+[node name="LoseBody" type="Node2D" parent="HBoxContainer"]
+position = Vector2( 312, 192 )
+scale = Vector2( 1.6, 1.6 )
+
+[node name="Sprite" type="Sprite" parent="HBoxContainer/LoseBody"]
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 7 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="HBoxContainer/LoseBody"]
+amount = 10
+lifetime = 0.4
+explosiveness = 0.1
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 15.0
+gravity = Vector2( 0, 0 )
+linear_accel = 200.0
+linear_accel_random = 0.3
+radial_accel = 5.0
+radial_accel_random = 0.2
+scale_amount = 3.0
+scale_amount_curve = SubResource( 3 )
+color = Color( 1, 0.956667, 0.48, 1 )
+
+[node name="Light2D2" type="Light2D" parent="HBoxContainer/LoseBody"]
+position = Vector2( -1, 0 )
+texture = ExtResource( 6 )
+texture_scale = 0.8
+color = Color( 1, 0.992157, 0.45098, 1 )
+energy = 0.8
+
+[node name="Sprite" type="Sprite" parent="HBoxContainer"]
+position = Vector2( 511, 109 )
+rotation = 3.14159
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 8 )
+
+[node name="Light2D2" type="Light2D" parent="HBoxContainer/Sprite"]
+position = Vector2( 1.22222, -18.8889 )
+texture = ExtResource( 6 )
+texture_scale = 0.25
+color = Color( 1, 0.992157, 0.45098, 1 )
+energy = 0.8
+shadow_enabled = true
+shadow_item_cull_mask = 3
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="HBoxContainer/Sprite/Light2D2"]
+light_mask = 2
+position = Vector2( 0, 2.22222 )
+occluder = SubResource( 4 )
+light_mask = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Intro"
+playback_speed = 0.6
+anims/Intro = SubResource( 5 )
+anims/RESET = SubResource( 6 )
+
+[connection signal="pressed" from="PanelContainer/CenterContainer3/VBoxContainer/Buttons/Button4" to="." method="_on_Button4_pressed"]
+[connection signal="pressed" from="PanelContainer/CenterContainer3/VBoxContainer/Buttons/Button" to="." method="_on_Button_pressed"]

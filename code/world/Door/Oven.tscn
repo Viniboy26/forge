@@ -1,22 +1,28 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://code/world/Door/Oven.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/circle_05.png" type="Texture" id=2]
 [ext_resource path="res://assets/sfx/fire.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sprites/world/Oven.png" type="Texture" id=4]
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 35.0
 
 [sub_resource type="Curve" id=1]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.995283, 0.118182 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.992806, 0.1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.154613, 0.478803, 0.638404, 0.817955, 1 )
 colors = PoolColorArray( 0.831373, 0.215686, 0.215686, 1, 0.831373, 0.215686, 0.215686, 1, 0.983016, 0.75194, 0.0756806, 1, 1, 0.812, 0.06, 1, 0.0545455, 0.0442909, 0.00327273, 1, 0, 0, 0, 1 )
 
-[sub_resource type="CircleShape2D" id=5]
-radius = 35.0
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0.00576369, 0.231988, 0.817955, 1 )
+colors = PoolColorArray( 0.37, 0.37, 0.37, 1, 0.25305, 0.25305, 0.25305, 1, 0.05, 0.05, 0.05, 1, 0, 0, 0, 1 )
 
 [node name="Oven" type="Node2D"]
 
 [node name="Oven" type="Polygon2D" parent="."]
+visible = false
 position = Vector2( -522, -112 )
 scale = Vector2( 1.5, 1.5 )
 color = Color( 0.39, 0.39, 0.39, 1 )
@@ -33,9 +39,34 @@ polygon = PoolVector2Array( 337, 78, 337, 72, 339, 69, 343, 68, 354, 68, 358, 69
 color = Color( 1, 0.31, 0.31, 1 )
 polygon = PoolVector2Array( 345, 77, 342, 75, 341, 72, 344, 74, 343, 70, 344, 69, 345, 71, 345, 73, 346, 72, 346, 69, 347, 71, 347, 73, 348, 73, 349, 72, 348, 69, 350, 70, 350, 72, 351, 74, 352, 72, 354, 70, 354, 72, 353, 73, 354, 75, 355, 74, 356, 72, 356, 70, 357, 72, 357, 74, 356, 75, 354, 77 )
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Oven"]
-position = Vector2( 349.333, 70.6667 )
-amount = 50
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 6, -7 )
+stream = ExtResource( 3 )
+volume_db = 8.0
+autoplay = true
+max_distance = 1500.0
+attenuation = 3.0
+bus = "SFX"
+
+[node name="InteractZone" type="Area2D" parent="."]
+position = Vector2( 2.00061, 4.57764e-05 )
+scale = Vector2( 1.2, 1.2 )
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone"]
+shape = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 2, -4 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 4 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Sprite"]
+position = Vector2( -0.00244141, 65.0002 )
+scale = Vector2( 7.5, 7.5 )
+amount = 80
 lifetime = 0.5
 explosiveness = 0.2
 emission_shape = 1
@@ -44,36 +75,36 @@ direction = Vector2( 0, -1 )
 gravity = Vector2( 0, 0 )
 initial_velocity = 20.0
 initial_velocity_random = 0.3
-scale_amount = 3.0
+scale_amount = 5.0
 scale_amount_curve = SubResource( 1 )
 color = Color( 1, 1, 1, 0.862745 )
 color_ramp = SubResource( 2 )
 
-[node name="Light2D2" type="Light2D" parent="Oven"]
-position = Vector2( 349.333, 75.3333 )
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="Sprite"]
+position = Vector2( -0.00244141, -125 )
+scale = Vector2( 7.5, 7.5 )
+amount = 50
+lifetime = 0.8
+explosiveness = 0.2
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector2( 0, -1 )
+gravity = Vector2( 0, 0 )
+initial_velocity = 20.0
+initial_velocity_random = 0.3
+scale_amount = 4.0
+scale_amount_random = 0.5
+scale_amount_curve = SubResource( 1 )
+color = Color( 1, 1, 1, 0.862745 )
+color_ramp = SubResource( 6 )
+
+[node name="Light2D2" type="Light2D" parent="Sprite"]
+position = Vector2( -0.00244141, 79.9997 )
+scale = Vector2( 7.5, 7.5 )
 texture = ExtResource( 2 )
 texture_scale = 1.5
 color = Color( 1, 0.706667, 0.45, 1 )
 shadow_enabled = true
 
-[node name="InteractZone" type="Area2D" parent="Oven"]
-position = Vector2( 349.334, 74.6667 )
-scale = Vector2( 0.8, 0.8 )
-collision_layer = 4
-collision_mask = 2
-script = ExtResource( 1 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Oven/InteractZone"]
-shape = SubResource( 5 )
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-position = Vector2( 6, -7 )
-stream = ExtResource( 3 )
-volume_db = 12.0
-autoplay = true
-max_distance = 1500.0
-attenuation = 3.0
-bus = "SFX"
-
-[connection signal="body_entered" from="Oven/InteractZone" to="Oven/InteractZone" method="_on_InteractZone_body_entered"]
-[connection signal="body_exited" from="Oven/InteractZone" to="Oven/InteractZone" method="_on_InteractZone_body_exited"]
+[connection signal="body_entered" from="InteractZone" to="InteractZone" method="_on_InteractZone_body_entered"]
+[connection signal="body_exited" from="InteractZone" to="InteractZone" method="_on_InteractZone_body_exited"]
