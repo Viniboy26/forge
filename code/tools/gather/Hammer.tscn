@@ -122,7 +122,7 @@ player_offset = Vector2( 24, -30 )
 margin_left = -3.0
 margin_right = 3.0
 margin_bottom = 40.0
-color = Color( 0.63, 0.328545, 0.00629999, 1 )
+color = Color( 0.631373, 0.329412, 0.00784314, 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 margin_left = -13.6667

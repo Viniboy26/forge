@@ -48,7 +48,7 @@ func _ready():
 	var new_anvil = anvil_scene.instance()
 	new_anvil.global_position = $DunGen.get_anvil_position() * Globals.cell_size
 	# Start it's pinging sound
-	new_anvil.get_node("Timer").start()
+#	new_anvil.get_node("Timer").start()
 	$Interactables.add_child(new_anvil)
 	
 	

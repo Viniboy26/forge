@@ -210,7 +210,7 @@ func _on_BronzeOre_pressed():
 
 
 func _on_MagicOre_pressed():
-	progress_speed = 10
+	progress_speed = 8
 	current_ore = Globals.Type.MAGIC
 
 
