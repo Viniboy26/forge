@@ -92,8 +92,8 @@ func _spawn_ores(rooms) -> void :
 		# Only spawn if it's not the player's spawn room
 		if id != $DunGen.player_room_id:
 #			print("Room : ", id, " and ", $DunGen.player_room_id)
-			for x in range(1, room.room_width):
-					for y in range(1, room.room_height):
+			for x in range(2, room.room_width - 2):
+					for y in range(2, room.room_height - 2):
 						# Don´t spawn in the center
 						if (room.room_start + Vector2(x,y)) != room.center :
 							if randf() < ore_spawn_rate :
@@ -150,7 +150,7 @@ func _spawn_enemy_spawners(rooms) -> void :
 	for room in rooms :
 		
 		# Only spawn if it's not the player's, anvil's or oven's room
-		if (id != $DunGen.player_room_id and id != $DunGen.anvil_room_id and id != $DunGen.oven_room_id) :
+		if (id != $DunGen.player_room_id or id != $DunGen.anvil_room_id or id != $DunGen.oven_room_id) :
 			
 			if randf() < spawner_spawn_rate :
 				# Place a spawner in the middle of the room

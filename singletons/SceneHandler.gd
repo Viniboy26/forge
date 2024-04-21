@@ -4,6 +4,7 @@ extends Node
 onready var menu = preload("res://scenes/Menu.tscn")
 onready var forge_room = preload("res://scenes/ForgeRoom.tscn")
 onready var dungeon = preload("res://code/testroom/TestDungeon.tscn")
+onready var test_room = preload("res://code/testroom/Testroom.tscn")
 
 onready var last_scene = null
 onready var current_scene = null

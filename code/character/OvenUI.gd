@@ -139,4 +139,4 @@ func _on_Close_pressed():
 func _on_OvenUI_visibility_changed():
 	$VBoxContainer/CenterContainer/TextureProgress.value = 0
 	
-	$VBoxContainer/Label.text = ""
+	$VBoxContainer/Label.text = 'Hold "Swing"'

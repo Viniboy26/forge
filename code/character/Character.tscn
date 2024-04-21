@@ -1122,6 +1122,8 @@ anims/Transform = SubResource( 4 )
 stream = ExtResource( 19 )
 volume_db = -3.0
 
+[node name="Gadget" type="Node" parent="."]
+
 [connection signal="visibility_changed" from="UI/Control/ForgeUI" to="UI/Control/ForgeUI" method="_on_ForgeUI_visibility_changed"]
 [connection signal="pressed" from="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/ForgeChoice/Hammer" to="UI/Control/ForgeUI" method="_on_Hammer_pressed"]
 [connection signal="pressed" from="UI/Control/ForgeUI/VBoxContainer/VBoxContainer/ForgeChoice/Pickaxe" to="UI/Control/ForgeUI" method="_on_Pickaxe_pressed"]

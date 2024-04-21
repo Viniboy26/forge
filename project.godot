@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "BspRoom",
 "language": "GDScript",
 "path": "res://code/testroom/prototype/DungeonGenerator/BspRoom.gd"
+}, {
+"base": "Resource",
+"class": "Cooldown",
+"language": "GDScript",
+"path": "res://code/tools/gadgets/Cooldown.gd"
 } ]
 _global_script_class_icons={
-"BspRoom": ""
+"BspRoom": "",
+"Cooldown": ""
 }
 
 [application]
@@ -98,6 +104,12 @@ pause={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":80,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":11,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+use_gadget={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":4,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
 

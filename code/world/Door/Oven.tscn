@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://code/world/Door/Oven.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/circle_05.png" type="Texture" id=2]
+[ext_resource path="res://assets/sfx/fire.wav" type="AudioStream" id=3]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.995283, 0.118182 ), 0.0, 0.0, 0, 0 ]
@@ -64,6 +65,15 @@ script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Oven/InteractZone"]
 shape = SubResource( 5 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 6, -7 )
+stream = ExtResource( 3 )
+volume_db = 12.0
+autoplay = true
+max_distance = 1500.0
+attenuation = 3.0
+bus = "SFX"
 
 [connection signal="body_entered" from="Oven/InteractZone" to="Oven/InteractZone" method="_on_InteractZone_body_entered"]
 [connection signal="body_exited" from="Oven/InteractZone" to="Oven/InteractZone" method="_on_InteractZone_body_exited"]

@@ -180,7 +180,7 @@ func save_tools() -> void :
 # Sanity gets drained when enemy gets close, and our speed gets slowed
 func drain_sanity() -> void :
 	if Globals.sanity > 0.0 :
-		Globals.sanity -= 0.15
+		Globals.sanity -= 0.3
 		
 		get_parent().sanity_check()
 	else :
@@ -223,8 +223,6 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		
 		$UI/Control/LoseUI.show()
 		$UI/Control/LoseUI/VBoxContainer/HBoxContainer/Retry.grab_focus()
-
-
 
 
 

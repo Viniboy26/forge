@@ -78,6 +78,7 @@ shape = SubResource( 1 )
 [node name="Ambient" type="AudioStreamPlayer2D" parent="."]
 
 [node name="LocationTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="SoundTimer" type="Timer" parent="."]
 

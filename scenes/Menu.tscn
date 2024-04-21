@@ -48,27 +48,36 @@ size_flags_stretch_ratio = 0.5
 custom_constants/separation = 30
 alignment = 1
 
-[node name="Button" type="Button" parent="PanelContainer/Buttons"]
-margin_top = 64.0
+[node name="Button4" type="Button" parent="PanelContainer/Buttons"]
+margin_top = 27.0
 margin_right = 276.0
-margin_bottom = 107.0
+margin_bottom = 70.0
+focus_neighbour_bottom = NodePath("../Button")
+theme = ExtResource( 3 )
+text = "Tutorial"
+
+[node name="Button" type="Button" parent="PanelContainer/Buttons"]
+margin_top = 100.0
+margin_right = 276.0
+margin_bottom = 143.0
+focus_neighbour_top = NodePath("../Button4")
 focus_neighbour_bottom = NodePath("../Button2")
 theme = ExtResource( 3 )
 text = "Start"
 
 [node name="Button2" type="Button" parent="PanelContainer/Buttons"]
-margin_top = 137.0
+margin_top = 173.0
 margin_right = 276.0
-margin_bottom = 180.0
+margin_bottom = 216.0
 focus_neighbour_top = NodePath("../Button")
 focus_neighbour_bottom = NodePath("../Button3")
 theme = ExtResource( 3 )
 text = "Options"
 
 [node name="Button3" type="Button" parent="PanelContainer/Buttons"]
-margin_top = 210.0
+margin_top = 246.0
 margin_right = 276.0
-margin_bottom = 253.0
+margin_bottom = 289.0
 focus_neighbour_top = NodePath("../Button2")
 theme = ExtResource( 3 )
 text = "Exit"
@@ -98,4 +107,5 @@ stream = ExtResource( 1 )
 volume_db = -6.0
 autoplay = true
 
+[connection signal="pressed" from="PanelContainer/Buttons/Button4" to="." method="_on_Button4_pressed"]
 [connection signal="pressed" from="PanelContainer/Buttons/Button" to="." method="_on_Button_pressed"]

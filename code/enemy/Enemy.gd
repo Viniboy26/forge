@@ -3,8 +3,8 @@ extends KinematicBody2D
 var direction : Vector2 = Vector2.RIGHT
 
 
-export var min_move_wait_time : float = 2.0
-export var max_move_wait_time : float = 10.0
+export var min_move_wait_time : float = 1.0
+export var max_move_wait_time : float = 5.0
 
 
 export var despawn_time : int = 180
