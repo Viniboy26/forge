@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://code/testroom/prototype/DungeonGenerator/Tilemap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://code/character/Character.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://code/Material/Pickup.tscn" type="PackedScene" id=5]
 [ext_resource path="res://code/world/Torch.tscn" type="PackedScene" id=6]
 [ext_resource path="res://code/enemy/Enemy.tscn" type="PackedScene" id=7]
+[ext_resource path="res://code/tools/gadgets/TorchGadget.tscn" type="PackedScene" id=8]
+[ext_resource path="res://code/tools/gadgets/SoundMine/SoundMineGadget.tscn" type="PackedScene" id=9]
 
 [node name="Testroom" type="Node2D"]
 script = ExtResource( 4 )
@@ -43,17 +45,33 @@ position = Vector2( 504, 186 )
 [node name="Decor" type="Node2D" parent="."]
 
 [node name="Torch" parent="Decor" instance=ExtResource( 6 )]
-position = Vector2( 673, 248 )
+position = Vector2( 337, 248 )
 
 [node name="Torch2" parent="Decor" instance=ExtResource( 6 )]
-position = Vector2( 344, 248 )
+position = Vector2( 710, 245 )
 
 [node name="Enemies" type="Node2D" parent="."]
+rotation = 0.858314
 
 [node name="Enemy" parent="Enemies" instance=ExtResource( 7 )]
+rotation = 0.000985734
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource( 7 )]
+rotation = 1.2512
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource( 7 )]
+rotation = 19.8136
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
 position = Vector2( 521, 349 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.12, 0.12, 0.12, 1 )
+
+[node name="TorchGadget" parent="." instance=ExtResource( 8 )]
+position = Vector2( 120, 497 )
+
+[node name="SoundMineGadget" parent="." instance=ExtResource( 9 )]
+position = Vector2( 511, 113 )
+
+[node name="Interactables" type="Node2D" parent="."]

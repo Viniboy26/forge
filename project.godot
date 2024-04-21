@@ -13,9 +13,21 @@ _global_script_classes=[ {
 "class": "BspRoom",
 "language": "GDScript",
 "path": "res://code/testroom/prototype/DungeonGenerator/BspRoom.gd"
+}, {
+"base": "Resource",
+"class": "Cooldown",
+"language": "GDScript",
+"path": "res://code/tools/gadgets/Cooldown.gd"
+}, {
+"base": "Node2D",
+"class": "Torch",
+"language": "GDScript",
+"path": "res://code/world/Torch.gd"
 } ]
 _global_script_class_icons={
-"BspRoom": ""
+"BspRoom": "",
+"Cooldown": "",
+"Torch": ""
 }
 
 [application]
